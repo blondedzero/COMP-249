@@ -1,4 +1,4 @@
 public class UAV {
-   double weight;
-   double price;
+   private double weight;
+   private double price;
 }

@@ -1,4 +1,3 @@
 public class Quadcopter extends Helicopter{
-    
-    int maxFlyingSpeed;
+    private int maxFlyingSpeed;
 }
