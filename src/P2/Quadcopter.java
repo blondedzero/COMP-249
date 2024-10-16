@@ -14,6 +14,12 @@ public Quadcopter(String brand, double price, int horsePower, int numberOfCylind
 	this.maxFlyingSpeed = maxFlyingSpeed;
 }
 
+//copy constructor
+ public Quadcopter(Quadcopter copy) {
+    this(copy.brand, copy.price, copy.horsePower, copy.numberOfCylinders, copy.creationYear, copy.passengerCapacity, copy.maxFlyingSpeed);
+
+}
+
 public int getMaxFlyingSpeed() {
 return this.maxFlyingSpeed;
 }
