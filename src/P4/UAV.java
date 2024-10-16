@@ -1,8 +1,8 @@
 package P4;
 
 public class UAV {
-   private double weight;
-   private double price;
+   protected double weight;
+   protected double price;
    
    public UAV() {
 	   this.weight = 0.0;
@@ -14,6 +14,11 @@ public class UAV {
 	   this.weight = weight;
 	   this.price = price;
    }
+
+//copy constructor
+   public UAV(UAV copy) {
+	   this(copy.weight, copy.price);
+   }  
    
    public double getUAVWeight() {
 	   return this.weight;
