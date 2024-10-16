@@ -4,9 +4,9 @@ import P1.Airplane;
 public class Helicopter extends Airplane {
 	
 	//Helicopter attributes
-	private int numberOfCylinders;
-	private int creationYear;
-	private int passengerCapacity;
+	protected int numberOfCylinders;
+	protected int creationYear;
+	protected int passengerCapacity;
 	
 	public Helicopter() {
 	this.numberOfCylinders = 0;
