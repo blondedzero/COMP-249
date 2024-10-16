@@ -35,4 +35,9 @@ public class UAV {
    public double setUAVPrice() {
 	   return this.price;
    }
+
+//toString
+   public String toString() {
+		return "This UAV has a weight of " + this.weight + " and a costs $" + this.price;
+   }
 }
