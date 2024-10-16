@@ -3,10 +3,16 @@ import P1.Airplane;
 
 public class Helicopter extends Airplane {
 	
-		//Helicopter attributes
-		private int numberOfCylinders;
-	    private int creationYear;
-	    private int passengerCapacity;
+	//Helicopter attributes
+	private int numberOfCylinders;
+	private int creationYear;
+	private int passengerCapacity;
+
+	public Helicopter() {
+	    this.numberOfCylinders = 0;
+	    this.creationYear = 0;
+	    this.passengerCapacity = 0;
+	    }
 
 	    
 	    //parameterized constructor
