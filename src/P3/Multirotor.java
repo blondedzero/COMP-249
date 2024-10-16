@@ -31,6 +31,13 @@ public class Multirotor extends Helicopter{
 	return this.numberOfRotors;
 	}
 	    
-
+    @Override
+    public String toString() {
+		return "This is a " + this.brand + " muiltirotor aircraft, at the price of $" + this.price + " .It possess " 
+				+ this.horsePower + " horae power and has ."
+				+ this.numberOfCylinders+ " cylinders and " +this.numberOfRotors+" rotors. It was made in the year " + this.creationYear 
+				+ " and can hold up to " + this.passengerCapacity +" passengers.";
+    	
+    }
     
 }
