@@ -52,4 +52,14 @@ public class Helicopter extends Airplane {
 	public int setPassengerCapacity() {
 	return this.passengerCapacity;
 	}
+
+	//toString
+	@Override
+	public String toString() {
+	return "This is a " + this.brand + " helicopter, at the price of $" + this.price + " .It possess " 
+		+ this.horsePower + " horae power and has ."
+		+ this.numberOfCylinders+ " cylinders. It was made in the year " + this.creationYear 
+		+ " and can hold up to " +this.passengerCapacity +" passengers.";
+	
+	}
 }
