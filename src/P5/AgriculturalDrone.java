@@ -16,6 +16,11 @@ public class AgriculturalDrone extends UAV{
     	this.brand = brand;
     	this.carryCapacity = carryCapacity;
     }
+
+    //copy constructor
+    public AgriculturalDrone(AgriculturalDrone copy) {
+    	this(copy.weight, copy.price, copy.brand, copy.carryCapacity);
+    }
     
     public String getADBrand() {
     	return this.brand;
