@@ -37,5 +37,11 @@ public class MAV extends UAV{
     public double setSize() {
     	return this.size;
     }
+
+     //toString
+    @Override
+    public String toString() {
+ 		return "This MAV" + this.model + " costs $" + this.price + " . It has a weight of " + this.weight + " and a size of " + this.size;
+    }
 }
 
