@@ -4,6 +4,11 @@ import P4.UAV;
 public class MAV extends UAV{
     private String model;
     private double size;
+
+    public MAV() {
+    	this.model = "";
+    	this.size = 0.0;
+    }    
     
     public MAV(double weight, double price, String model, double size) {
     	super(weight, price);
