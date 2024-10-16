@@ -15,6 +15,11 @@ public class Multirotor extends Helicopter{
 		
 		this.numberOfRotors = numberOfRotors;
 	}
+
+	//copy constructor
+	public Multirotor(Multirotor copy) {
+		this(copy.brand, copy.price, copy.horsePower, copy.numberOfCylinders, copy.creationYear, copy.passengerCapacity, copy.numberOfRotors);
+	}
 	
 	//getter
 	public int getNumberOfRotors() {
