@@ -1,8 +1,8 @@
 package P4;
 
 public class UAV {
-   protected double weight;
-   protected double price;
+   public double weight;
+   public double price;
    
    public UAV() {
 	   this.weight = 0.0;
