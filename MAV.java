@@ -17,4 +17,12 @@ public class MAV extends UAV{
     public double getSize() {
     	return this.size;
     }
+
+    public String setModel() {
+    	return this.model;
+    }
+    
+    public double setSize() {
+    	return this.size;
+    }
 }
