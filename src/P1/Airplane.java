@@ -43,4 +43,10 @@ public class Airplane {
 	return this.horsePower;
 	}
 	
+	//toString
+	public String toString() {
+	return "This is a " + this.brand + " plane, at the price of $" + this.price + " and possess " + this.horsePower + " horae power.";
+	
+	}
+
 	}
