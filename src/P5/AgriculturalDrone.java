@@ -37,4 +37,9 @@ public class AgriculturalDrone extends UAV{
     public int setCarryCapacity() {
     	return this.carryCapacity;
     }
+
+    @Override
+    public String toString() {
+ 		return "This Agricultural drone " +this.brand+" costs $" + this.price + ". It has a weight of " + this.weight + " and can carry up to " + this.carryCapacity + " passengers.";
+    }
 }
