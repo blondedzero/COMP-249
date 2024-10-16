@@ -28,5 +28,15 @@ public int gsetMaxFlyingSpeed() {
 return this.maxFlyingSpeed;
 }
 
+ //toString
+    @Override
+    public String toString() {
+		return "This is a " + this.brand + " quadcopter, at the price of $" + this.price + " .It possesses " 
+				+ this.horsePower + " horae power and has ."
+				+ this.numberOfCylinders+ " cylinders. It was made in the year " + this.creationYear 
+				+ " .It can hold up to " + this.passengerCapacity +" passengers and can fly at a max speed of ." + this.maxFlyingSpeed+ " kts";
+    	
+    }
+
 
 }
