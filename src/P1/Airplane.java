@@ -1,0 +1,52 @@
+package P1;
+
+public class Airplane {
+	
+	protected String brand;
+	protected double price;
+	protected int horsePower;
+	
+	
+	public Airplane() {
+	this.brand = "";
+	this.price = 0.0;
+	this.horsePower = 0;
+	}
+	
+	public Airplane(String brand, double price, int horsePower){
+	this.brand = brand;
+	this.price = price;
+	this.horsePower = horsePower;
+	}
+	
+	public Airplane(Airplane copy) {
+	this(copy.brand, copy.price, copy.horsePower);
+	}
+	
+	public String getBrand(){
+	return this.brand;
+	}
+	public double getPrice(){
+	return this.price;
+	}
+	public int getHorsePower(){
+	return this.horsePower;
+	}
+	
+	public String setBrand(){
+	return this.brand;
+	}
+	public double setPrice(){
+	return this.price;
+	}
+	public int setHorsePower(){
+	return this.horsePower;
+	}
+	
+	//toString
+	public String toString() {
+	return "This is a " + this.brand + " plane, at the price of $" + this.price + " and possess " + this.horsePower + " horae power.";
+	
+	}
+
+	}
