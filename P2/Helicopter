@@ -1,19 +1,24 @@
+//-----------------------------------------------------
+// Part: (include Part Number)
+// Written by: (include your name(s) and student ID(s))
+//-----------------------------------------------------
+
 package P2;
 import P1.Airplane;
 
 public class Helicopter extends Airplane {
 	
-	//Helicopter attributes
+	//helicopter attributes
 	protected int numberOfCylinders;
 	protected int creationYear;
 	protected int passengerCapacity;
 	
+	//default constructor
 	public Helicopter() {
-	this.numberOfCylinders = 0;
-	this.creationYear = 0;
-	this.passengerCapacity = 0;
+	this.numberOfCylinders = 4;
+	this.creationYear = 2005;
+	this.passengerCapacity = 6;
 	}
-	
 	
 	//parameterized constructor
 	public Helicopter(String brand, double price, int horsePower, int numberOfCylinders, int creationYear, int passengerCapacity){
@@ -21,14 +26,14 @@ public class Helicopter extends Airplane {
 	this.numberOfCylinders = numberOfCylinders;
 	this.creationYear = creationYear;
 	this.passengerCapacity = passengerCapacity;
-	
 	}
+	
 	//copy constructor
 	public Helicopter(Helicopter copy) {
 	this(copy.brand, copy.price, copy.horsePower, copy.numberOfCylinders, copy.creationYear, copy.passengerCapacity);
 	}
 	
-	//setters
+	//getters
 	public int getNumberOfCylinders() {
 	return this.numberOfCylinders;
 	}
@@ -41,6 +46,7 @@ public class Helicopter extends Airplane {
 	return this.passengerCapacity;
 	}
 	
+	//setters
 	public int setNumberOfCylinders() {
 	return this.numberOfCylinders;
 	}
@@ -56,10 +62,22 @@ public class Helicopter extends Airplane {
 	//toString
 	@Override
 	public String toString() {
-	return "This is a " + this.brand + " helicopter, at the price of $" + this.price + " .It possess " 
-		+ this.horsePower + " horae power and has ."
-		+ this.numberOfCylinders+ " cylinders. It was made in the year " + this.creationYear 
-		+ " and can hold up to " +this.passengerCapacity +" passengers.";
-	
+	return "This is a " + this.brand + " helicopter. It is priced at $" + this.price + 
+			". Its engine can produce " + this.horsePower + " horse power and has " + this.numberOfCylinders+ " cylinders. The model was manufactured in "
+			+ this.creationYear + " and it can hold up to " + this.passengerCapacity +" passengers.";
 	}
+	
+	//equals
+	@Override
+	public boolean equals(Object x)
+	{
+		if (x == null || this.getClass() != x.getClass())
+			return false;
+			// cast the passed object to a Helicopter object
+			Helicopter h = (Helicopter)x;
+			return (this.brand == h.brand && this.price == h.price && this.horsePower == h.horsePower 
+					&& this.numberOfCylinders == h.numberOfCylinders && this.creationYear == h.creationYear
+					&& this.passengerCapacity == h.passengerCapacity);
+		}
+	
 }
