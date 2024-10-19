@@ -47,9 +47,7 @@ public class Driver {
         System.out.println("Type \"UAV\" to display the least and most expensive UAV.");
         System.out.println("Type here: ");
 
-        String choice = s.nextLine();
-
-        System.out.println(drones[0].getClass());
+        String choice = s.next();
 
         if (choice.equalsIgnoreCase("UAV")) 
         System.out.println(FindLeastAndMostExpensiveUAV(drones));
@@ -68,7 +66,6 @@ public class Driver {
         if (drones == null || drones.length == 0) return "Error: No UAV objects found!";
 
         //find least expensive drone
-        
         int index = 0;
         for (int i = 0; i < drones.length; i++) {
             if (drones[i].getUAVPrice() < drones[index].getUAVPrice()) {
