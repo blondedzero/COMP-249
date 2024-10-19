@@ -1,11 +1,16 @@
+//-----------------------------------------------------
+// Part: 1
+// Written by: Kaila Quimson 40240746 &
+//-----------------------------------------------------
+
 package P5;
 import P4.UAV;
 
 public class MAV extends UAV{
 	
 	//MAV attributes
-	private String model;
-    private double size;
+	protected String model;
+    protected double size;
 
     //default constructor
     public MAV() {
@@ -46,7 +51,7 @@ public class MAV extends UAV{
     //toString
     @Override
     public String toString() {
- 		return "This MAV" + this.model + " costs $" + this.price + " . It has a weight of " + this.weight + " and a wingspan size of " + this.size + " inches";
+ 		return "MAV (" + this.model + ") costs $" + this.price + ". It has a weight of " + this.weight + " and a wingspan size of " + this.size + " m";
     }
     
     //equals
@@ -62,5 +67,4 @@ public class MAV extends UAV{
 		}
 
 }
-
 
