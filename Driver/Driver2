@@ -29,37 +29,37 @@ public class Driver2 {
         	boolean check = false;
         	while(!check)
         		if (storage[i] instanceof Airplane) {
-        			duplicate_storage[i] = Airplane(Airplane storage[i]);
+        			duplicate_storage[i] = new Airplane((Airplane) storage[i]);
         			check = true;
         			break;
         		}
         		if (storage[i] instanceof Helicopter) {
-            		duplicate_storage[i] = Helicopter(Helicopter storage[i]);
+            		duplicate_storage[i] = new Helicopter((Helicopter) storage[i]);
             		check = true;
             		break;
         		}
             	if (storage[i] instanceof Quadcopter) {
-                	duplicate_storage[i] = Quadcopter(Quadcopter storage[i]);
+                	duplicate_storage[i] = new Quadcopter((Quadcopter) storage[i]);
                 	check = true;
                 	break;
             	}
                 if (storage[i] instanceof Multirotor) {
-                	duplicate_storage[i] = Multirotor(Multirotor storage[i]);
+                	duplicate_storage[i] = new Multirotor((Multirotor) storage[i]);
                 	check = true;
                 	break;
                 }
                 if (storage[i] instanceof UAV) {
-                	duplicate_storage[i] = UAV(UAV storage[i]);
+                	duplicate_storage[i] = new UAV ((UAV) storage[i]);
                 	check = true;
                 	break;
                 }
                 if (storage[i] instanceof AgriculturalDrone) {
-                	duplicate_storage[i] = Multirotor(AgriculturalDrone storage[i]);
+                	duplicate_storage[i] = new UAV ((AgriculturalDrone) storage[i]);
                 	check = true;
                 	break;
                 }
                 if (storage[i] instanceof MAV) {
-                	duplicate_storage[i] = Multirotor(MAV storage[i]);
+                	duplicate_storage[i] = new UAV ((MAV) storage[i]);
                 	check = true;
                 	break;
                 }	
@@ -96,10 +96,11 @@ public class Driver2 {
 
         String choice = s.next();
 
-        if (choice.equalsIgnoreCase("Duplicate")) 
+        if (choice.equalsIgnoreCase("Duplicate")) {
         Object[] dupe = new Object[15];
-        dupe = storage.copyFlyingObjects();
-       
+        Object[] dupe = storage.length;
+        }
+        
         else { 
             System.out.println("Invalid response...try again later.");
             System.exit(0);
@@ -115,7 +116,7 @@ public class Driver2 {
         //printing deep copy
         System.out.println("Here are the contents of the duplicated aircraft storage unit:");
         //turning deep copy into a string
-        for (int j = 0; j < duplicate_storage.length; j++) {
+        for (int j = 0; j < dupe.length; j++) {
         	System.out.println(duplicate_storage[j]);
         }
         
