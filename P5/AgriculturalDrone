@@ -1,3 +1,9 @@
+
+//-----------------------------------------------------
+// Part: 1
+// Written by: Kaila Quimson 40240746 &
+//-----------------------------------------------------
+
 package P5;
 import P4.UAV;
 
@@ -46,7 +52,7 @@ public class AgriculturalDrone extends UAV{
     //toString
     @Override
     public String toString() {
- 		return "This Agricultural drone " +this.brand+" costs $" + this.price + ". It has a weight of " + this.weight + " lbs and can carry up to " + this.carryCapacity + " lbs.";
+ 		return "This Agricultural drone " +this.brand+" costs $" + this.price + ". It has a weight of " + this.weight + " lbs and can carry up to " + this.carryCapacity + " kg.";
     }
     
     //equals
