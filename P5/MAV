@@ -2,26 +2,30 @@ package P5;
 import P4.UAV;
 
 public class MAV extends UAV{
-    private String model;
+	
+	//MAV attributes
+	private String model;
     private double size;
 
+    //default constructor
     public MAV() {
-    	this.model = "";
-    	this.size = 0.0;
+    	this.model = "Maverick";
+    	this.size = 6.0;	//inches
     }    
     
+    //parameterized constructor
     public MAV(double weight, double price, String model, double size) {
     	super(weight, price);
-    	
     	this.model = model;
-    	this.size = size;
-    	
+    	this.size = size;	
     }
+    
     //copy constructor
     public MAV(MAV copy) {
     	this(copy.weight, copy.price, copy.model, copy.size);
     }
     
+    //getters
     public String getModel() {
     	return this.model;
     }
@@ -30,6 +34,7 @@ public class MAV extends UAV{
     	return this.size;
     }
     
+    //setters
     public String setModel() {
     	return this.model;
     }
@@ -38,10 +43,24 @@ public class MAV extends UAV{
     	return this.size;
     }
 
-     //toString
+    //toString
     @Override
     public String toString() {
- 		return "This MAV" + this.model + " costs $" + this.price + " . It has a weight of " + this.weight + " and a size of " + this.size;
+ 		return "This MAV" + this.model + " costs $" + this.price + " . It has a weight of " + this.weight + " and a wingspan size of " + this.size + " inches";
     }
+    
+    //equals
+	@Override
+	public boolean equals(Object x)
+	{
+		if (x == null || this.getClass() != x.getClass())
+			return false;
+			// cast the passed object to an Airplane object
+			MAV m = (MAV)x;
+			return (this.weight == m.weight && this.price == m.price
+            && this.model == m.model && this.size == m.size);
+		}
+
 }
+
 
