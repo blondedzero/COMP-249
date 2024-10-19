@@ -2,27 +2,31 @@ package P1;
 
 public class Airplane {
 	
+	//airplane attributes
 	protected String brand;
 	protected double price;
 	protected int horsePower;
 	
-	
+	//default constructor
 	public Airplane() {
-	this.brand = "";
-	this.price = 0.0;
-	this.horsePower = 0;
+	this.brand = "Boeing";
+	this.price = 90000000.00;	//USD
+	this.horsePower = 60000;
 	}
 	
+	//parameterized constructor
 	public Airplane(String brand, double price, int horsePower){
 	this.brand = brand;
 	this.price = price;
 	this.horsePower = horsePower;
 	}
 	
+	//copy constructor
 	public Airplane(Airplane copy) {
 	this(copy.brand, copy.price, copy.horsePower);
 	}
 	
+	//getters
 	public String getBrand(){
 	return this.brand;
 	}
@@ -33,6 +37,7 @@ public class Airplane {
 	return this.horsePower;
 	}
 	
+	//setters
 	public String setBrand(){
 	return this.brand;
 	}
@@ -45,8 +50,18 @@ public class Airplane {
 	
 	//toString
 	public String toString() {
-	return "This is a " + this.brand + " plane, at the price of $" + this.price + " and possess " + this.horsePower + " horae power.";
+	return "This is a " + this.brand + " plane. It is priced at $" + this.price + " and its engine can produce " + this.horsePower + " horse power.";
+	}
 	
-	}
+	//equals
+	@Override
+	public boolean equals(Object x)
+	{
+		if (x == null || this.getClass() != x.getClass())
+			return false;
+			// cast the passed object to an Airplane object
+			Airplane a = (Airplane)x;
+			return (this.brand == a.brand && this.price == a.price && this.horsePower == a.horsePower);
+		}
 
-	}
+}
