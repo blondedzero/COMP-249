@@ -1,42 +1,54 @@
 package P2;
-public class Quadcopter extends Helicopter{
+public class Quadcopter extends Helicopter {
 
-private int maxFlyingSpeed;
-
-public Quadcopter() {
-	this.maxFlyingSpeed = 0;
-}
-
-public Quadcopter(String brand, double price, int horsePower, int numberOfCylinders, int creationYear,
-		int passengerCapacity, int maxFlyingSpeed) {
-	super(brand, price, horsePower, numberOfCylinders, creationYear, passengerCapacity);
+	//quadcopter attribute
+	private int maxFlyingSpeed;
 	
-	this.maxFlyingSpeed = maxFlyingSpeed;
-}
+	//default constructor
+	public Quadcopter() {
+		this.maxFlyingSpeed = 40;	//mph
+	}
+	
+	//parameterized constructor
+	public Quadcopter(String brand, double price, int horsePower, int numberOfCylinders, int creationYear, int passengerCapacity, int maxFlyingSpeed) {
+		super(brand, price, horsePower, numberOfCylinders, creationYear, passengerCapacity);
+		this.maxFlyingSpeed = maxFlyingSpeed;
+	}
+	
+	//copy constructor
+	 public Quadcopter(Quadcopter copy) {
+	    this(copy.brand, copy.price, copy.horsePower, copy.numberOfCylinders, copy.creationYear, copy.passengerCapacity, copy.maxFlyingSpeed);
+	}
+	
+	//getter
+	public int getMaxFlyingSpeed() {
+	return this.maxFlyingSpeed;
+	}
+	
+	//setter
+	public int setMaxFlyingSpeed() {
+	return this.maxFlyingSpeed;
+	}
 
-//copy constructor
- public Quadcopter(Quadcopter copy) {
-    this(copy.brand, copy.price, copy.horsePower, copy.numberOfCylinders, copy.creationYear, copy.passengerCapacity, copy.maxFlyingSpeed);
-
-}
-
-public int getMaxFlyingSpeed() {
-return this.maxFlyingSpeed;
-}
-
-public int gsetMaxFlyingSpeed() {
-return this.maxFlyingSpeed;
-}
-
- //toString
+	//toString
     @Override
     public String toString() {
-		return "This is a " + this.brand + " quadcopter, at the price of $" + this.price + " .It possesses " 
-				+ this.horsePower + " horae power and has ."
-				+ this.numberOfCylinders+ " cylinders. It was made in the year " + this.creationYear 
-				+ " .It can hold up to " + this.passengerCapacity +" passengers and can fly at a max speed of ." + this.maxFlyingSpeed+ " kts";
-    	
+		return "This is a " + this.brand + " quadcopter. It can fly at a max speed of " + this.maxFlyingSpeed + " kts and it is priced at $" + this.price + 
+				". Its engine can produce " + this.horsePower + " horse power and has " + this.numberOfCylinders + " cylinders. The model was manufactured in "
+				+ this.creationYear + " and it can hold up to " + this.passengerCapacity +" passengers.";
     }
-
+    
+  //equals
+  	@Override
+  	public boolean equals(Object x)
+  	{
+  		if (x == null || this.getClass() != x.getClass())
+  			return false;
+  			// cast the passed object to a Helicopter object
+  			Quadcopter q = (Quadcopter)x;
+  			return (this.brand == q.brand && this.price == q.price && this.horsePower == q.horsePower 
+  					&& this.numberOfCylinders == q.numberOfCylinders && this.creationYear == q.creationYear
+  					&& this.passengerCapacity == q.passengerCapacity && this.maxFlyingSpeed == q.maxFlyingSpeed);
+  		}
 
 }
