@@ -75,7 +75,7 @@ public class Driver2 {
     public static void main(String[] args) {
 
         //array to store aircrafts
-        Object[] storage = new Airplane[15];
+        Object[] storage = new Object[15];
     	
         //initializing aircraft objects
         storage[0] = new Airplane();
@@ -97,7 +97,7 @@ public class Driver2 {
         //welcome message
         System.out.println("Welcome to the Aircraft Storage Duplicator Program!");
     	//printing original copy
-        System.out.println("Here are the contents of the original aircraft storage unit:");
+        System.out.println("\nHere are the contents of the original aircraft storage unit:");
         //turning original copy into a string
         for (int i = 0; i < storage.length; i++) {
         	System.out.println(storage[i]);
