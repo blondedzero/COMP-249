@@ -1,56 +1,69 @@
-package P3;
-import P2.Helicopter;
+//-----------------------------------------------------
+// Part: 1
+// Written by: Kaila Quimson 40240746 &
+//-----------------------------------------------------
 
-public class Multirotor extends Helicopter{
-	
-	//multirotor attribute
-	private int numberOfRotors;
-	
-	//default constructor
-	public Multirotor() {
-	this.numberOfRotors = 6;
-	}	
-	
-	//parameterized constructor
-	public Multirotor(String brand, double price, int horsePower, int numberOfCylinders, int creationYear, int passengerCapacity, int numberOfRotors) {
-		super(brand, price, horsePower, numberOfCylinders, creationYear, passengerCapacity);
-		this.numberOfRotors = numberOfRotors;
-	}
+package P5;
+import P4.UAV;
 
-	//copy constructor
-	public Multirotor(Multirotor copy) {
-		this(copy.brand, copy.price, copy.horsePower, copy.numberOfCylinders, copy.creationYear, copy.passengerCapacity, copy.numberOfRotors);
-	}
+public class MAV extends UAV{
 	
-	//getter
-	public int getNumberOfRotors() {
-	return this.numberOfRotors;
-	}
-	
-	//setter
-	public int setNumberOfRotors() {
-	return this.numberOfRotors;
-	}
-	
-	//toString
-    @Override
-    public String toString() {
-		return "This is a " + this.brand + " multirotor aircraft. It has " + this.numberOfRotors + " rotors and it is priced at $" + this.price + 
-				". Its engine can produce " + this.horsePower + " horse power and has " + this.numberOfCylinders + " cylinders. The model was manufactured in "
-				+ this.creationYear + " and it can hold up to " + this.passengerCapacity +" passengers.";	
+	//MAV attributes
+	protected String model;
+    protected double size;
+
+    //default constructor
+    public MAV() {
+    	this.model = "Maverick";
+    	this.size = 6.0;	//inches
+    }    
+    
+    //parameterized constructor
+    public MAV(double weight, double price, String model, double size) {
+    	super(weight, price);
+    	this.model = model;
+    	this.size = size;	
     }
     
-	//equals
+    //copy constructor
+    public MAV(MAV copy) {
+    	this(copy.weight, copy.price, copy.model, copy.size);
+    }
+    
+    //getters
+    public String getModel() {
+    	return this.model;
+    }
+    
+    public double getSize() {
+    	return this.size;
+    }
+    
+    //setters
+    public String setModel() {
+    	return this.model;
+    }
+    
+    public double setSize() {
+    	return this.size;
+    }
+
+    //toString
+    @Override
+    public String toString() {
+ 		return "MAV (" + this.model + ") costs $" + this.price + ". It has a weight of " + this.weight + " and a wingspan size of " + this.size + " m";
+    }
+    
+    //equals
 	@Override
 	public boolean equals(Object x)
 	{
 		if (x == null || this.getClass() != x.getClass())
 			return false;
-			// cast the passed object to a Helicopter object
-			Multirotor m = (Multirotor)x;
-			return (this.brand == m.brand && this.price == m.price && this.horsePower == m.horsePower 
-					&& this.numberOfCylinders == m.numberOfCylinders && this.creationYear == m.creationYear
-					&& this.passengerCapacity == m.passengerCapacity && this.numberOfRotors == m.numberOfRotors);
+			// cast the passed object to an Airplane object
+			MAV m = (MAV)x;
+			return (this.weight == m.weight && this.price == m.price
+            && this.model == m.model && this.size == m.size);
 		}
 
 }
