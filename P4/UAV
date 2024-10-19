@@ -1,43 +1,60 @@
 package P4;
 
 public class UAV {
-   public double weight;
-   public double price;
    
-   public UAV() {
-	   this.weight = 0.0;
-	   this.price = 0.0;
+	//UAV attributes
+	public double weight;
+	public double price;
+   
+	//default constructor
+	public UAV() {
+	   this.weight = 2.0;	//lbs
+	   this.price = 2000.00;
    }
    
-   public UAV(double weight, double price) {
-	   
+	//parameterized constructor
+	public UAV(double weight, double price) {
 	   this.weight = weight;
 	   this.price = price;
    }
 
-//copy constructor
-   public UAV(UAV copy) {
+	//copy constructor
+	public UAV(UAV copy) {
 	   this(copy.weight, copy.price);
-   }  
-   
-   public double getUAVWeight() {
-	   return this.weight;
-   }
-   
-   public double getUAVPrice() {
-	   return this.price;
-   }
-   
-   public double setUAVWeight() {
-	   return this.weight;
-   }
-   
-   public double setUAVPrice() {
-	   return this.price;
-   }
+	}  
 
-//toString
-   public String toString() {
-		return "This UAV has a weight of " + this.weight + " and a costs $" + this.price;
-   }
+	//getters
+	public double getUAVWeight() {
+	   return this.weight;
+	}
+   
+	public double getUAVPrice() {
+	   return this.price;
+	}
+   
+	//setters
+	public double setUAVWeight() {
+	   return this.weight;
+	}
+   
+	public double setUAVPrice() {
+	   return this.price;
+	}
+
+	//toString
+	public String toString() {
+		return "This UAV has a weight of " + this.weight + " lbs and it's priced at $" + this.price;
+	}
+
+   //equals
+	@Override
+	public boolean equals(Object x)
+	{
+		if (x == null || this.getClass() != x.getClass())
+			return false;
+			// cast the passed object to an Airplane object
+			UAV u = (UAV)x;
+			return (this.weight == u.weight && this.price == u.price);
+		}
+	
 }
