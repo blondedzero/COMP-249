@@ -68,7 +68,7 @@ public class Driver2 {
     public static void main(String[] args) {
 
         //array to store aircrafts
-        Airplane[] storage = new Airplane[9];
+        Object[] storage = new Object[15];
     	
         //initializing aircraft objects
         storage[0] = new Airplane();
@@ -80,14 +80,12 @@ public class Driver2 {
         storage[6] = new Quadcopter("Volocopter", 300000, 134, 4, 2017, 2, 100);
         storage[7] = new Multirotor("Volocopter", 500000, 134, 4, 2017, 2, 18);
         storage[8] = new Multirotor("Workhorse SureFly", 500000, 134, 4, 2017, 2, 18);
-
-        UAV[] storage2 = new UAV[7];
-        storage2[1] = new UAV(6.3, 13200);
-        storage2[2] = new UAV(1.39, 8000);
-        storage2[3] = new AgriculturalDrone(9.5, 15000,"DJI", 30);
-        storage2[4] = new AgriculturalDrone(2.4, 1500,"Parrot", 5);
-        storage2[5] = new MAV(1.9, 35000, "Raven", 1.2);
-        storage2[6] = new MAV(0.2, 130, "Mambo Fly", 0.32);
+        storage[9] = new UAV(6.3, 13200);
+        storage[10] = new UAV(1.39, 8000);
+        storage[11] = new AgriculturalDrone(9.5, 15000,"DJI", 30);
+        storage[12] = new AgriculturalDrone(2.4, 1500,"Parrot", 5);
+        storage[13] = new MAV(1.9, 35000, "Raven", 1.2);
+        storage[14] = new MAV(0.2, 130, "Mambo Fly", 0.32);
         
         //welcome message
         System.out.println("Welcome to the Aircraft Storage Duplicator Program!");
