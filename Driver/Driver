@@ -1,4 +1,5 @@
 package Driver;
+
 import P1.Airplane;
 import P2.Helicopter;
 import P2.Quadcopter;
@@ -7,12 +8,15 @@ import P4.UAV;
 import P5.AgriculturalDrone;
 import P5.MAV;
 
+import java.util.Scanner;
+
 public class Driver {
 
+    static Scanner s = new Scanner(System.in);
     public static void main(String[] args) {
 
         //array to store hangar aircrafts
-        Airplane[] hangar = new Airplane[7];
+        Airplane[] hangar = new Airplane[9];
         UAV[] drones = new UAV[6];
     	
         //initializing aircraft objects
@@ -36,8 +40,20 @@ public class Driver {
         
         //welcome message
         System.out.println("Welcome to the Hangar Aircraft Comparer Program!");
-        System.out.println("Here are the following aircrafts stored in the hangar:");
-        FindLeastAndMostExpensiveUAV(drones);
+        System.out.println("Type \"UAV\" to display the least and most expensive UAV.");
+        System.out.println("Type here: ");
+
+        String choice = s.nextLine();
+
+        System.out.println(drones[0].getClass());
+
+        if (choice.equalsIgnoreCase("UAV")) 
+        System.out.println(FindLeastAndMostExpensiveUAV(drones));
+       
+        else { 
+            System.out.println("Invalid response...try again later.");
+            System.exit(0);
+        }
 
     }
 
@@ -48,22 +64,21 @@ public class Driver {
         if (drones == null || drones.length == 0) return "Error: No UAV objects found!";
 
         //find least expensive drone
-        double least = 0;
+        
         int index = 0;
         for (int i = 0; i < drones.length; i++) {
-            if (drones[i].getUAVPrice() < drones[i].price) {
-                least = drones[i].getUAVPrice();
+            if (drones[i].getUAVPrice() < drones[index].getUAVPrice()) {
+                
                 index = i;    
             }
         
         }
 
         //find most expensive drone
-        double most = 0;
         int count = 0;
         for (int j = 0; j < drones.length; j++) {
-            if (drones[j].getUAVPrice() > drones[j].price) {
-                most = drones[j].getUAVPrice();
+            if (drones[j].getUAVPrice() > drones[count].getUAVPrice()) {
+
                 count = j;     
             }
             
@@ -73,3 +88,4 @@ public class Driver {
     }
     
 }
+
