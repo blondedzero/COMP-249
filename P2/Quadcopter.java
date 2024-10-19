@@ -1,8 +1,13 @@
+//-----------------------------------------------------
+// Part: 1
+// Written by: Kaila Quimson 40240746 &
+//-----------------------------------------------------
+
 package P2;
 public class Quadcopter extends Helicopter {
 
 	//quadcopter attribute
-	private int maxFlyingSpeed;
+	protected int maxFlyingSpeed;
 	
 	//default constructor
 	public Quadcopter() {
