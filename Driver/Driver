@@ -10,42 +10,66 @@ import P5.MAV;
 public class Driver {
 
     public static void main(String[] args) {
-    	
-    	
+
         //array to store hangar aircrafts
         Airplane[] hangar = new Airplane[7];
-        UAV[] hangar2 = new UAV[8];
+        UAV[] drones = new UAV[6];
     	
         //initializing aircraft objects
-        hangar[0] = new Helicopter();
-        hangar[1] = new Helicopter();
-        hangar[2] = new Quadcopter();
-        hangar[3] = new Multirotor();
-        hangar[4] = new Helicopter();
-        hangar[5] = new Quadcopter();
-        hangar[6] = new Multirotor();
+        hangar[0] = new Airplane();
+        hangar[1] = new Airplane("Airbus", 110000000, 75000);
+        hangar[2] = new Airplane();
+        hangar[3] = new Helicopter("Robinson", 300000, 160, 4, 1979, 2);
+        hangar[4] = new Helicopter("Robinson", 500000, 245, 6, 1992, 4);
+        hangar[5] = new Quadcopter("Ehang", 200000, 203, 4, 2021, 4, 130);
+        hangar[6] = new Quadcopter("Volocopter", 300000, 134, 4, 2017, 2, 100);
+        hangar[7] = new Multirotor("Volocopter", 500000, 134, 4, 2017, 2, 18);
+        hangar[8] = new Multirotor("Workhorse SureFly", 500000, 134, 4, 2017, 2, 18);
         
-        hangar2[0] = new MAV();
-        hangar2[1] = new AgriculturalDrone();
-        hangar2[2] = new AgriculturalDrone();
-        hangar2[3] = new MAV();
-        hangar2[4] = new MAV();
-        hangar2[5] = new MAV();
-        hangar2[4] = new AgriculturalDrone();
-        hangar2[5] = new AgriculturalDrone();
+        //initializing drone objects
+        drones[0] = new UAV(6.3,13200);
+        drones[1] = new UAV(1.39, 8000);
+        drones[2] = new AgriculturalDrone(9.5, 15000,"DJI", 30);
+        drones[3] = new AgriculturalDrone(2.4, 1500,"Parrot", 5);
+        drones[4] = new MAV(1.9, 35000, "Raven", 1.2);
+        drones[5] = new MAV(0.2, 130, "Mambo Fly", 0.32);
         
         //welcome message
         System.out.println("Welcome to the Hangar Aircraft Comparer Program!");
         System.out.println("Here are the following aircrafts stored in the hangar:");
-
-
-     
+        FindLeastAndMostExpensiveUAV(drones);
 
     }
 
     //findLeastAndMostExpensiveUAV method
-    private static String findLeastAndMostExpensiveUAV() {
+    private static String FindLeastAndMostExpensiveUAV(UAV drones[]) {
+    
+        //check if UAV objects exist
+        if (drones == null || drones.length == 0) return "Error: No UAV objects found!";
 
-        return "";
+        //find least expensive drone
+        double least = 0;
+        int index = 0;
+        for (int i = 0; i < drones.length; i++) {
+            if (drones[i].getUAVPrice() < drones[i].price) {
+                least = drones[i].getUAVPrice();
+                index = i;    
+            }
+        
+        }
+
+        //find most expensive drone
+        double most = 0;
+        int count = 0;
+        for (int j = 0; j < drones.length; j++) {
+            if (drones[j].getUAVPrice() > drones[j].price) {
+                most = drones[j].getUAVPrice();
+                count = j;     
+            }
+            
+        }
+        //print results
+        return "Most expensive UAV: " + drones[count] + "\nLeast expensive UAV: " + drones[index];           
     }
+    
 }
