@@ -23,8 +23,13 @@ public class Driver2 {
     public static Object[] copyFlyingObjects(Object[] storage) {
 
         //creating duplicate array object
-        Object[] duplicate_storage = new Object[15];
+        Object[] duplicate_storage = new Object[storage.length];
         //creating deep copy
+        if (storage.length == 0) {
+        	System.out.println("There are no flying objects  to duplicate... Please try again later.");
+            System.exit(0);
+        }
+        
         for (int i = 0; i < storage.length; i++) {
         	boolean check = false;
         	while(!check)
@@ -97,8 +102,8 @@ public class Driver2 {
         String choice = s.next();
 
         if (choice.equalsIgnoreCase("Duplicate")) {
-        Object[] dupe = new Object[15];
-        Object[] dupe = storage.length;
+        storage.copyFlyingObjects(storage);
+        
         }
         
         else { 
