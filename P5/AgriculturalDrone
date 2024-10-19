@@ -2,17 +2,20 @@ package P5;
 import P4.UAV;
 
 public class AgriculturalDrone extends UAV{
-    private String brand;
+    
+	//AgriculturalDrone attributes
+	private String brand;
     private int carryCapacity;
 
-        public AgriculturalDrone() {
-    	this.brand = "";
-    	this.carryCapacity = 0;
-    }
+	//default constructor
+    public AgriculturalDrone() {
+	this.brand = "Fly Dragon";
+	this.carryCapacity = 60;	//lbs
+	}
     
-    public AgriculturalDrone(double weight, double price, String brand, int carryCapacity) {
+	//parameterized constructor
+	public AgriculturalDrone(double weight, double price, String brand, int carryCapacity) {
     	super(weight, price);
-    	
     	this.brand = brand;
     	this.carryCapacity = carryCapacity;
     }
@@ -22,6 +25,7 @@ public class AgriculturalDrone extends UAV{
     	this(copy.weight, copy.price, copy.brand, copy.carryCapacity);
     }
     
+    //getters
     public String getADBrand() {
     	return this.brand;
     }
@@ -30,6 +34,7 @@ public class AgriculturalDrone extends UAV{
     	return this.carryCapacity;
     }
 
+    //setters
     public String setADBrand() {
     	return this.brand;
     }
@@ -38,8 +43,22 @@ public class AgriculturalDrone extends UAV{
     	return this.carryCapacity;
     }
 
+    //toString
     @Override
     public String toString() {
- 		return "This Agricultural drone " +this.brand+" costs $" + this.price + ". It has a weight of " + this.weight + " and can carry up to " + this.carryCapacity + " passengers.";
+ 		return "This Agricultural drone " +this.brand+" costs $" + this.price + ". It has a weight of " + this.weight + " lbs and can carry up to " + this.carryCapacity + " lbs.";
     }
+    
+    //equals
+	@Override
+	public boolean equals(Object x)
+	{
+		if (x == null || this.getClass() != x.getClass())
+			return false;
+			// cast the passed object to an Airplane object
+			AgriculturalDrone a = (AgriculturalDrone)x;
+			return (this.weight == a.weight && this.price == a.price
+            && this.brand == a.brand && this.carryCapacity == a.carryCapacity);
+		}
+
 }
