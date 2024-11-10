@@ -64,19 +64,20 @@ public class BookCatalog {
 	  String line;
 
 	//used a while loop to read the contents of the file until it reaches the end where it will stop the loop
-	while ((line = br.readLine()) != null) {
-	try {
-	checkFields(line);
+	    while ((line = br.readLine()) != null) {
+	        try {
+	            checkFields(line);
 	//catches all the exceptions created in one go
-	} catch ( TooManyFieldsException | TooFewFieldsException | MissingFieldException | UnknownGenreException e){
-	logSyntaxError(e.getMessage(), filename, line);
-			}
+	            } 
+                catch ( TooManyFieldsException | TooFewFieldsException | MissingFieldException | UnknownGenreException e){
+	            logSyntaxError(e.getMessage(), filename, line);
+		        }
+		    }
+	    }
+	    catch(IOException e){
+	    System.out.println("Error processing file name, " + e.getMessage());
 		}
-	}
-	catch(IOException e){
-	System.out.println("Error processing file name, " + e.getMessage());
-		}
-	}
+	
 
 	//validateRecord function
 	private static boolean checkFields(String record) {
@@ -103,3 +104,4 @@ public class BookCatalog {
 	// TODO Auto-generated method stub
 
 	}
+}
