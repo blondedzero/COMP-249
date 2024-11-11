@@ -5,7 +5,7 @@ import java.util.*;
 public class BookCatalog {
 
 	//givenc code
-		public static void main(String[] args) {
+		public static void main(String[] args) throws MissingFieldException, TooFewFieldsException, TooManyFieldsException, UnknownGenreException {
 		{
 			do_part1();
 			do_part2();
@@ -16,7 +16,7 @@ public class BookCatalog {
 	}
 
 	//do_part1
-		public static void do_part1() {
+		public static void do_part1() throws MissingFieldException, TooFewFieldsException, TooManyFieldsException, UnknownGenreException {
 
 		try {
 			FileReader myFileReader = new FileReader("Part1_input_file_names.txt");
@@ -52,7 +52,7 @@ public class BookCatalog {
 
 		//FUNCTIONS
 		//FUNCTION THAT READS LINES WITHIN THE FIRST FILE
-		private static void processFile(String filename) {
+		private static void processFile(String filename) throws MissingFieldException, TooFewFieldsException, TooManyFieldsException, UnknownGenreException, IOException {
 			try {
 				FileReader myFileReader = new FileReader(filename);
 				BufferedReader br = new BufferedReader(myFileReader);
@@ -67,12 +67,12 @@ public class BookCatalog {
 				
 				//CHECKS IF THERE ARE NOT ENOUGH FIELDS AND TROWS AN EXCEPTION
                 if (allFields.length < 6) {
-                	throw TooFewFieldsException("Too Few Fields!");
+                	throw new TooFewFieldsException("Too Few Fields!");
                 }
 
 				//CHECKS IF THERE ARE TOO MANY FIELDS AND THROWS AN EXCEPTION
                 if (allFields.length > 6) {
-                	throw TooManyFieldsException("Too Many Fields!"); 
+                	throw new TooManyFieldsException("Too Many Fields!"); 
                 }
                 // FIELDS HAVE BEEN VERIFIED. 
 
@@ -81,7 +81,7 @@ public class BookCatalog {
 
 				//CHECKS IF THE RETURN DOES NOT CORRESPONDS TO "ALL" MEANING THERE IS A FIELD MISSING THUS THROWS AN EXCEPTION
                 if (!missingField.equals("All")) {
-                	throw MissingFieldException(missingField);
+                	throw new MissingFieldException(missingField);
 				}
 
 				//CHECKS FOR ISBN VALIDITY
@@ -96,7 +96,7 @@ public class BookCatalog {
 				//CHECKS FOR GENRE VALIDITY
 				String genre = allFields[4];
 				if(checkGenre(genre) == false){
-					throw UnknownGenreException(genre);
+					throw new UnknownGenreException(genre);
 				}
             
 			}
