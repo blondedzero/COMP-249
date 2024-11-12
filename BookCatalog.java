@@ -117,6 +117,13 @@ public class BookCatalog {
 					if(checkGenre(genre) == false){
 						throw new UnknownGenreException(genre);
 					}
+
+					//CHECKS FOR YEAR VALIDITY
+					String year = allFields[5];
+					if(checkYear(year) != true){
+						System.out.println("Invalid year");;
+					}
+					
 				
 				}
 					}catch(FileNotFoundException fnf) {
@@ -131,15 +138,17 @@ public class BookCatalog {
 				}
 
 
-			//validateRecord function
+			//vVALID RECORD FUNCTION
 			private static String[] checkFields(String record) {
 				if(record.contains("\"")){
-					
+					//CONSIDERS 2 CASE FOR POTENTIAL TITLES
+					//CASE 1 IS WITH QUOTATIONS. IT WILL FIND RECORD WITH QUOTATIONS AND SPLIT IT FROM THERE TO STORE IT AN ARRAY
 					String[] field1 = record.split("\"");
-					
+					//IT WILL THEN SPLIT AFTER EVERY COMMA IT FINDS AND STORE IT IN AN ARRAY STORUN
 					field1[1].split(",");
+
+					//CASE 2 WILL JUST CONSIDER COMMAS, SIMILAR TO THE LINE ABOVE
 					String[] otherfields = record.split(",");
-				
 					String[] allFields = new String[otherfields.length + 1];
                     
 					allFields[0] = field1[0];
@@ -232,6 +241,12 @@ public class BookCatalog {
 				default: return false;
 				
 			}
+		 }
+
+		 private static boolean checkYear(String year){
+			int validYear = Integer.parseInt(year);
+			if(validYear >= 1900 && validYear <= 2026) return true;
+			else return false;
 		 }
 
 		private static void logSyntaxError(String filename, String errorMsg, String record){
