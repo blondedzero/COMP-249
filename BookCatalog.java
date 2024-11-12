@@ -1,22 +1,41 @@
+// -----------------------------------------------------
+// Assignment 2
+// Question: PART 1, PART 2 & PART 3
+// Written by: Kaila Quimson (40240746) & Nicholas Chamoun (40264135)
+// ----------------------------------------------------- 
+
+
 import java.io.*;
 import java.util.*;
 
 
+
 public class BookCatalog {
 
-	//givenc code
-		public static void main(String[] args) throws MissingFieldException, TooFewFieldsException, TooManyFieldsException, UnknownGenreException {
+	private static PrintWriter errorWriter;
+		public static void main(String[] args) throws TooFewFieldsException, TooManyFieldsException, MissingFieldException, UnknownGenreException {
 		{
-			do_part1();
-			do_part2();
-			do_part3();
+			try {
+				errorWriter = new PrintWriter(new FileWriter("syntax_error_file.txt"));
+
+				do_part1();
+				do_part2();
+				do_part3();
+
+			} catch (IOException e) {
+				System.out.println("File initializing error: " + e.getMessage());
+			} finally{
+				if (errorWriter != null){
+					errorWriter.close();
+				}
+			}
 
 		}
 
 	}
 
 	//do_part1
-		public static void do_part1() throws MissingFieldException, TooFewFieldsException, TooManyFieldsException, UnknownGenreException {
+		public static void do_part1() throws TooFewFieldsException, TooManyFieldsException, MissingFieldException, UnknownGenreException{
 
 		try {
 			FileReader myFileReader = new FileReader("Part1_input_file_names.txt");
@@ -25,7 +44,7 @@ public class BookCatalog {
 			int numberOfFiles = Integer.parseInt(br.readLine());
 
 			String filename;
-			//reads lines until it reaches an empty line, loop will stop
+			//READS LINES UNTIL IT REACHES AN EMPTY LINE WHICH WILL CASUE THE LOOP TO STOP
 			while((filename = br.readLine())!= null) {
 				processFile(filename);
 			}
@@ -52,57 +71,63 @@ public class BookCatalog {
 
 		//FUNCTIONS
 		//FUNCTION THAT READS LINES WITHIN THE FIRST FILE
-		private static void processFile(String filename) throws MissingFieldException, TooFewFieldsException, TooManyFieldsException, UnknownGenreException, IOException {
+		private static void processFile(String filename) throws TooFewFieldsException, TooManyFieldsException, MissingFieldException, IOException, UnknownGenreException {
+			String line = null;
 			try {
 				FileReader myFileReader = new FileReader(filename);
 				BufferedReader br = new BufferedReader(myFileReader);
 
-			String line;
-
-			//WHILE LOOP THAT WILL STOP ONCE IT REACHES THE LAST LINE
-			while ((line = br.readLine()) != null) {
-				//LINE IS A RECORD
-				//THE CHECKFIELDS IS CALLES AND STORES IN A NEW ARRAY
-				String[] allFields = checkFields(line);
-				
-				//CHECKS IF THERE ARE NOT ENOUGH FIELDS AND TROWS AN EXCEPTION
-                if (allFields.length < 6) {
-                	throw new TooFewFieldsException("Too Few Fields!");
-                }
-
-				//CHECKS IF THERE ARE TOO MANY FIELDS AND THROWS AN EXCEPTION
-                if (allFields.length > 6) {
-                	throw new TooManyFieldsException("Too Many Fields!"); 
-                }
-                // FIELDS HAVE BEEN VERIFIED. 
-
-				//CALLS THE MISSING FIELDS FUNCITON AND STORES RETURN INTO A VARIABLE 
-                String missingField = checkMissingField(allFields);
-
-				//CHECKS IF THE RETURN DOES NOT CORRESPONDS TO "ALL" MEANING THERE IS A FIELD MISSING THUS THROWS AN EXCEPTION
-                if (!missingField.equals("All")) {
-                	throw new MissingFieldException(missingField);
-				}
-
-				//CHECKS FOR ISBN VALIDITY
-				String isbn = allFields[3]; //ISBN IS FOUND IN POSITION 3 OF THE ARRAY STORING IT IN THE ISBN VARIABLE
-				if(checkISBN10(isbn) == true || checkISBN13(isbn) == true) {
-					System.out.println("VALILD ISBN");
-				}
-				if (checkISBN10(isbn) == false || checkISBN13(isbn) == false){
-					System.out.println("Error: invalid ISBN");
-				}
-
-				//CHECKS FOR GENRE VALIDITY
-				String genre = allFields[4];
-				if(checkGenre(genre) == false){
-					throw new UnknownGenreException(genre);
-				}
-            
-			}
-				} catch(FileNotFoundException e) {
-						System.out.println("This file was not found");
+	
+				//WHILE LOOP THAT WILL STOP ONCE IT REACHES THE LAST LINE
+				while ((line = br.readLine()) != null) {
+					//LINE IS A RECORD
+					//THE CHECKFIELDS IS CALLES AND STORES IN A NEW ARRAY
+					String[] allFields = checkFields(line);
+					
+					//CHECKS IF THERE ARE NOT ENOUGH FIELDS AND TROWS AN EXCEPTION
+					if (allFields.length < 6) {
+						throw new TooFewFieldsException("Too Few Fields!");
 					}
+
+					//CHECKS IF THERE ARE TOO MANY FIELDS AND THROWS AN EXCEPTION
+					if (allFields.length > 6) {
+						throw new TooManyFieldsException("Too Many Fields!"); 
+					}
+					// FIELDS HAVE BEEN VERIFIED. 
+
+					//CALLS THE MISSING FIELDS FUNCITON AND STORES RETURN INTO A VARIABLE 
+					String missingField = checkMissingField(allFields);
+
+					//CHECKS IF THE RETURN DOES NOT CORRESPONDS TO "ALL" MEANING THERE IS A FIELD MISSING THUS THROWS AN EXCEPTION
+					if (!missingField.equals("All")) {
+						throw new MissingFieldException(missingField);
+					}
+
+					//CHECKS FOR ISBN VALIDITY
+					String isbn = allFields[3]; //ISBN IS FOUND IN POSITION 3 OF THE ARRAY STORING IT IN THE ISBN VARIABLE
+					if(checkISBN10(isbn) == true || checkISBN13(isbn) == true) {
+						System.out.println("VALILD ISBN");
+					}
+					if (checkISBN10(isbn) == false || checkISBN13(isbn) == false){
+						System.out.println("Error: invalid ISBN");
+					}
+
+					//CHECKS FOR GENRE VALIDITY
+					String genre = allFields[4];
+					if(checkGenre(genre) == false){
+						throw new UnknownGenreException(genre);
+					}
+				
+				}
+					}catch(FileNotFoundException fnf) {
+							System.out.println("This file was not found: " + filename);
+					}catch(IOException e){
+						System.out.println("Error reading file: " + filename);
+					}catch(TooFewFieldsException | TooManyFieldsException | MissingFieldException | UnknownGenreException e){
+						logSyntaxError(filename, e.getMessage(), line);
+
+					}
+
 				}
 
 
@@ -209,7 +234,14 @@ public class BookCatalog {
 			}
 		 }
 
-		 
+		private static void logSyntaxError(String filename, String errorMsg, String record){
+			errorWriter.println("Syntax error in file: " + filename);
+			errorWriter.println("-----------------------------");
+			errorWriter.println("Error: " + errorMsg);
+			errorWriter.println("Record: " + record);
+			errorWriter.println();
+
+		} 
 	}	
 	
 
