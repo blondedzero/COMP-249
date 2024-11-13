@@ -1,0 +1,25 @@
+Syntax error in file: txtFiles/books1995.csv.txt
+-----------------------------
+Error: Too Many Fields!
+Record: "Zimbalist, Efrem - A Life",Roy Malan,19.95,1574670913,MRB,1905
+
+Syntax error in file: txtFiles/books1997.csv.txt
+-----------------------------
+Error: Too Many Fields!
+Record: "Collecting Movie Posters - An Illustrated Reference Guide To Movie Art: Posters, Press Kits, And Lobby Cards",Edwin E. Poole & Susan T. Poole,30.95,9780786401697,HCB,1997
+
+Syntax error in file: txtFiles/books1998.csv.txt
+-----------------------------
+Error: Author
+Record: Back In The Saddle - Essays On Western Film And Television Actors,,35.95,9780786405664,MTV,1998
+
+Syntax error in file: txtFiles/books1999.csv.txt
+-----------------------------
+Error: Too Many Fields!
+Record: "Franklin, Aretha - Aretha: From These Roots",Aretha Franklin & David Ritz,2.95,0375500332,MRB,1999
+
+Syntax error in file: txtFiles/books2002.csv.txt
+-----------------------------
+Error: Too Many Fields!
+Record: "Gravesites of Southern Musicians - A Guide To Over 300 Jazz, Blues, Country And Rock Performers' Burial Places",Edward Amos,35.95,9780786412709,MBR,2002
+

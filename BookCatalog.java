@@ -38,7 +38,7 @@ public class BookCatalog {
 		public static void do_part1() throws TooFewFieldsException, TooManyFieldsException, MissingFieldException, UnknownGenreException{
 
 		try {
-			FileReader myFileReader = new FileReader("Part1_input_file_names.txt");
+			FileReader myFileReader = new FileReader("txtFiles/Part1_input_file_names.txt");
 			BufferedReader br = new BufferedReader(myFileReader);
 
 			int numberOfFiles = Integer.parseInt(br.readLine());
@@ -46,7 +46,7 @@ public class BookCatalog {
 			String filename;
 			//READS LINES UNTIL IT REACHES AN EMPTY LINE WHICH WILL CASUE THE LOOP TO STOP
 			while((filename = br.readLine())!= null) {
-				processFile(filename);
+				processFile("txtFiles/" + filename);
 			}
 		}
 		catch(IOException e){
@@ -123,8 +123,6 @@ public class BookCatalog {
 					if(checkYear(year) != true){
 						System.out.println("Invalid year");;
 					}
-					
-				
 				}
 					}catch(FileNotFoundException fnf) {
 							System.out.println("This file was not found: " + filename);
