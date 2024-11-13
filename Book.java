@@ -50,4 +50,16 @@ public class Book {
     public String setYear(){
         return this.year;
     }
+
+    @Override
+    public String toString() {
+        return "Book Title: " + title +
+                "\nAuthors: " + authors +
+                "\nPrice: " + price +
+                "\nISBN: " + isbn +
+                "\nGenre: " + genre +
+                "\nYear: " + year;
+    }
 }
+}
+
