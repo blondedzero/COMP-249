@@ -34,14 +34,15 @@ public class SerializationHandler {
                     int year = Integer.parseInt(fields[5]);
                     
                     // ISBN-10 Validation
-                    if (isbn.length() == 10) {
-                        validateIsbn10(isbn);
-                    } 
-                    // ISBN-13 Validation
-                    else if (isbn.length() == 13) {
-                        validateIsbn13(isbn);
-                    } else {
-                        throw new BadIsbn10Exception("Invalid ISBN-10 or ISBN-13 length");
+                    switch (isbn.length()) {
+                        case 10:
+                            validateIsbn10(isbn);
+                            break;
+                        case 13:
+                            validateIsbn13(isbn);
+                            break;
+                        default:
+                            throw new BadIsbn10Exception("Invalid ISBN-10 or ISBN-13 length");
                     }
                     
                     // Price Validation
