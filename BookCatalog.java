@@ -30,7 +30,6 @@ public class BookCatalog {
 		public static void main(String[] args) throws TooFewFieldsException, TooManyFieldsException, MissingFieldException, UnknownGenreException, IOException {
 		{
 			try {
-				//errorWriter = new PrintWriter(new FileWriter("syntax_error_file.txt"));
 				do_part1();
 				do_part2();
 				do_part3();
@@ -48,7 +47,7 @@ public class BookCatalog {
 		public static void do_part1() throws TooFewFieldsException, TooManyFieldsException, MissingFieldException, UnknownGenreException{
 
 		try {
-			
+
 			FileReader myFileReader = new FileReader("txtFiles/Part1_input_file_names.txt");
 			BufferedReader br = new BufferedReader(myFileReader);
 
@@ -108,11 +107,13 @@ public class BookCatalog {
 
 					//CHECKS IF THERE ARE NOT ENOUGH FIELDS AND TROWS AN EXCEPTION
 					if (allFields.length < 6) {
+						logSyntaxError(filename, "Too Few Fields", line);
 						throw new TooFewFieldsException("Too Few Fields!");
 					}
 
 					//CHECKS IF THERE ARE TOO MANY FIELDS AND THROWS AN EXCEPTION
 					if (allFields.length > 6) {
+						logSyntaxError(filename, "Too Many Fields", line);
 						throw new TooManyFieldsException("Too Many Fields!"); 
 					}
 					// FIELDS HAVE BEEN VERIFIED. 
@@ -123,6 +124,7 @@ public class BookCatalog {
 
 					//CHECKS IF THE RETURN DOES NOT CORRESPONDS TO "ALL" MEANING THERE IS A FIELD MISSING THUS THROWS AN EXCEPTION
 					if (!missingField.equals("All")) {
+						logSyntaxError(filename, "Missing Field", line);
 						throw new MissingFieldException(missingField);
 					}
 
@@ -160,7 +162,6 @@ public class BookCatalog {
 					String year = allFields[5];
 					if(checkYear(year) != true){
 						System.out.println("Invalid year");
-						continue;
 					}
 
 					//WRITE TO SPECIFIC GENRE FILE
@@ -296,7 +297,7 @@ public class BookCatalog {
 					return i;
 				}
 			}
-			return -1; // Return -1 if the genre code is not found
+			return -1; 
 		}
 
 		 private static boolean checkYear(String year){
@@ -306,17 +307,17 @@ public class BookCatalog {
 		 }
 
 		private static void logSyntaxError(String filename, String errorMsg, String record){
-			FileWriter errorWriter;
 			try {
-				errorWriter = new FileWriter("syntax_error_file.txt");
-
+				BufferedWriter errorWriter = new BufferedWriter(new FileWriter("syntax_error_file.txt"));
 				errorWriter.write("Syntax error in file: " + filename);
-				errorWriter.write("-----------------------------");
-				errorWriter.write("Error: " + errorMsg);
-				errorWriter.write("Record: " + record);
+				errorWriter.write("\n-----------------------------");
+				errorWriter.write("\nError: " + errorMsg);
+				errorWriter.write("\nRecord: " + record);
 				errorWriter.write("");
+
+				errorWriter.close();
 			} catch (IOException e) {
-				e.printStackTrace();
+		
 			}
 
 			

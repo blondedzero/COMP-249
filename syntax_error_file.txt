@@ -1,0 +1,4 @@
+Syntax error in file: txtFiles/books2010.csv.txt
+-----------------------------
+Error: Too Many Fields
+Record: "James, Tommy - Me, the Mob, and the Music: One Helluva Ride with Tommy James & The Shondells (Autographed by Tommy James)",Tommy James & Martin Fitzpatrick,16.98,9781439128657,MRB,2010
