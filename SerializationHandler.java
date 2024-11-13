@@ -12,11 +12,11 @@ import java.io.*;
 
 public class SerializationHandler {
 
-    public void do_part2() throws IOException {
+    public void do_part2(String[] inputFiles) throws IOException {
         String[] csvFiles = FileNames.CSV_FILES;
         
         for (String csvFile : csvFiles) {
-            BufferedReader reader = new BufferedReader(new FileReader(csvFile));
+            BufferedReader reader = new BufferedReader(new FileReader("txtFiles/" + inputFiles));
             BufferedWriter errorWriter = new BufferedWriter(new FileWriter("semantic_error_file.txt", true));
             
             Book[] validBooks = new Book[100];  // Example size
@@ -27,7 +27,7 @@ public class SerializationHandler {
                 try {
                     String[] fields = line.split(",");
                     String title = fields[0];
-                    String authors = fields[1];
+                    String author = fields[1];
                     double price = Double.parseDouble(fields[2]);
                     String isbn = fields[3];
                     String genre = fields[4];
@@ -55,7 +55,7 @@ public class SerializationHandler {
                         throw new BadYearException("Invalid year: " + year);
                     }
                     
-                    validBooks[validCount++] = new Book(title, authors, price, isbn, genre, year);
+                    validBooks[validCount++] = new Book(title, author, price, isbn, genre, year);
                 } catch (BadIsbn10Exception | BadIsbn13Exception | BadPriceException | BadYearException ex) {
                     errorWriter.write("semantic error in file: " + csvFile + "\n====================\nError: " + ex.getMessage() + "\nRecord: " + line + "\n\n");
                 } catch (NumberFormatException ex) {

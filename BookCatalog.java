@@ -13,15 +13,27 @@ import java.util.*;
 public class BookCatalog {
 
 	private static PrintWriter errorWriter;
+
+		// Arrays for genre codes and corresponding output file names
+		private static final String[] genreCodes = {"CCB", "HCB", "MTV", "MRB", "NEB", "OTR", "SSM", "TPA"};
+		private static final String[] genreFileNames = {
+			"Cartoons_Comics_Books.csv",
+			"Hobbies_Collectibles_Books.csv",
+			"Movies_TV.csv",
+			"Music_Radio_Books.csv",
+			"Nostalgia_Eclectic_Books.csv",
+			"Old_Time_Radio.csv",
+			"Sports_Sports_Memorabilia.csv",
+			"Trains_Planes_Automobiles.csv"
+		};
+
 		public static void main(String[] args) throws TooFewFieldsException, TooManyFieldsException, MissingFieldException, UnknownGenreException {
 		{
 			try {
 				errorWriter = new PrintWriter(new FileWriter("syntax_error_file.txt"));
-
 				do_part1();
 				do_part2();
 				do_part3();
-
 			} catch (IOException e) {
 				System.out.println("File initializing error: " + e.getMessage());
 			} finally{
@@ -53,8 +65,6 @@ public class BookCatalog {
 			System.out.println("Error reading input file names, " + e.getMessage());
 		}
 		
-		
-
 	}
 
 			//do_part2
@@ -73,9 +83,19 @@ public class BookCatalog {
 		//FUNCTION THAT READS LINES WITHIN THE FIRST FILE
 		private static void processFile(String filename) throws TooFewFieldsException, TooManyFieldsException, MissingFieldException, IOException, UnknownGenreException {
 			String line = null;
+
+			BufferedWriter[] writers = new BufferedWriter[genreCodes.length];
+
+			
+				
 			try {
 				FileReader myFileReader = new FileReader(filename);
 				BufferedReader br = new BufferedReader(myFileReader);
+
+				// INITIALIZES WRITERS FOR EACH GENRE FILE
+				for (int i = 0; i < genreCodes.length; i++) {
+					writers[i] = new BufferedWriter(new FileWriter(genreFileNames[i]));
+				}
 
 	
 				//WHILE LOOP THAT WILL STOP ONCE IT REACHES THE LAST LINE
@@ -108,33 +128,44 @@ public class BookCatalog {
 					if(checkISBN10(isbn) == true || checkISBN13(isbn) == true) {
 						System.out.println("VALILD ISBN");
 					}
+
 					if (checkISBN10(isbn) == false || checkISBN13(isbn) == false){
 						System.out.println("Error: invalid ISBN");
+						continue;
 					}
 
 					//CHECKS FOR GENRE VALIDITY
-					String genre = allFields[4];
-					if(checkGenre(genre) == false){
-						throw new UnknownGenreException(genre);
-					}
+					String genreCode = allFields[4];
+                	int genreIndex = checkGenre(genreCode);
+                	if (genreIndex == -1) {
+                    logSyntaxError(filename, "Unknown Genre: " + genreCode, line);
+                    continue;
+               		}
 
 					//CHECKS FOR YEAR VALIDITY
 					String year = allFields[5];
 					if(checkYear(year) != true){
-						System.out.println("Invalid year");;
-					}
-				}
-					}catch(FileNotFoundException fnf) {
-							System.out.println("This file was not found: " + filename);
-					}catch(IOException e){
-						System.out.println("Error reading file: " + filename);
-					}catch(TooFewFieldsException | TooManyFieldsException | MissingFieldException | UnknownGenreException e){
-						logSyntaxError(filename, e.getMessage(), line);
-
+						System.out.println("Invalid year");
+						continue;
 					}
 
+					//WRITE TO SPECIFIC GENRE FILE
+					writers[genreIndex].write(line);
+					writers[genreIndex].newLine();
 				}
-
+				} catch (IOException e) {
+					System.out.println("Error reading file: " + filename);
+				} finally {
+					//CLOSE GENRE WRITERS
+					for (BufferedWriter writer : writers) {
+						if (writer != null) {
+							writer.close();
+						}
+					}
+				}
+			}
+			
+		
 
 			//vVALID RECORD FUNCTION
 			private static String[] checkFields(String record) {
@@ -203,7 +234,7 @@ public class BookCatalog {
             }
 
 			private static boolean checkISBN13(String ISBN){
-				//"1234565219"
+				
 				int x1 = Integer.parseInt(ISBN.substring(0,1));
 				int x2 = Integer.parseInt(ISBN.substring(1,2));
 				int x3 = Integer.parseInt(ISBN.substring(2,3));
@@ -218,28 +249,22 @@ public class BookCatalog {
 				int x12 = Integer.parseInt(ISBN.substring(9,12));
 				int x13 = Integer.parseInt(ISBN.substring(9,13));
 				
-				int sum = x1 + (3 * x2) + x3 + (3*x4) + x5 + (3*x6) + x7 + (3*x8) + x9 + (3*x10)+ x11 + (3*x12)+ x11;
+				int sum = x1 + (3 * x2) + x3 + (3*x4) + x5 + (3*x6) + x7 + (3*x8) + x9 + (3*x10)+ x11 + (3*x12)+ x11 + (3*x13);
 				
 				if(sum % 13 == 0){
 					return true;
 				} else { return false; }
 			}
 
-		 private static boolean checkGenre(String genre){
-				
-			switch(genre){
-				case "CCB": return true;
-				case "HCB": return true;
-				case "MTV": return true;
-				case "MRB": return true;
-				case "NEB": return true;
-				case "OTR": return true;
-				case "SSM": return true;
-				case "TPA": return true;
-				default: return false;
-				
+
+		 private static int checkGenre(String genreCode) {
+			for (int i = 0; i < genreCodes.length; i++) {
+				if (genreCodes[i].equals(genreCode)) {
+					return i;
+				}
 			}
-		 }
+			return -1; // Return -1 if the genre code is not found
+		}
 
 		 private static boolean checkYear(String year){
 			int validYear = Integer.parseInt(year);
@@ -256,5 +281,6 @@ public class BookCatalog {
 
 		} 
 	}	
+
 	
 
