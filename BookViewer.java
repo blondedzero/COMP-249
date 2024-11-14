@@ -5,156 +5,187 @@
 // ----------------------------------------------------- 
 
 
-// This class defines the program's UI
+//This class defines the program's UI
 //It displays an interative menu that allows usees to view/select files and view their records. 
-
 
 import java.io.*;
 import java.util.*;
 
 public class BookViewer {
 
-    private static final String[] files = FileNames.BINARY_FILES;
-    private static Book[] currentBooks = null;
-    private static int currentIndex = 0;
-    private static String currentFileName = "";
+    private static List<Book[]> bookArrays = new ArrayList<>();
+    private static int currentArrayIndex = 0;
+    private static int currentRecordIndex = 0;
 
-    public static void main(String[] args) {
-        do_part3();
-    }
+    public static void main(String[] args) 
+   
+    {
+        // Step 1: 
+        loadSerializedFiles();
 
-    public static void do_part3() {
-        Scanner sc = new Scanner(System.in);
+        // Step 2: 
+        Scanner scanner = new Scanner(System.in);
+        String choice;
 
-        System.out.println("Welcome to Kaila & Nicholas' Book Viewer program!\n");
-
-        while (true) {
-            // main menu
+        do {
+            // Main Menu
             System.out.println("-----------------------------");
-            System.out.println("          Main Menu");
+            System.out.println("Main Menu");
             System.out.println("-----------------------------");
-            System.out.printf(" v View the selected file: %s (%d records)\n", currentFileName, 
-                    (currentBooks == null ? 0 : currentBooks.length));
-            System.out.println(" s Select a file to view");
-            System.out.println(" x Exit");
-            System.out.println("-----------------------------");
-            System.out.print(" Enter Your Choice: ");
-            String choice = sc.nextLine().toLowerCase();
+            System.out.println("v View the selected file: " + getCurrentFileName() + " (" + getCurrentFileRecords() + " records)");
+            System.out.println("s Select a file to view");
+            System.out.println("x Exit");
+            System.out.print("Enter Your Choice: ");
+            choice = scanner.nextLine().toLowerCase();
 
             switch (choice) {
                 case "v":
-                    viewSelectedFile();
+                    // View the selected file
+                    viewFile();
                     break;
                 case "s":
-                    selectFile(sc);
+                    // Select a file
+                    selectFile();
                     break;
                 case "x":
-                    System.out.println("Now exiting Kaila & Nicholas' Book Viewer program...");
-                    System.exit(0);
-                    return;
+                    // Exit
+                    System.out.println("Exiting program.");
+                    break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
+                    break;
             }
-        }
+        } while (!choice.equals("x"));
     }
 
-    // method to view selected file
-    public static void viewSelectedFile() {
-        if (currentBooks == null) {
-            System.out.println("No file selected yet.");
-            return;
-        }
+    private static void loadSerializedFiles() {
+        String[] fileNames = {
+            "Cartoons_Comics_Books.csv.ser", 
+            "Hobbies_Collectibles_Books.csv.ser", 
+            "Movies_TV.csv.ser", 
+            "Music_Radio_Books.csv.ser", 
+            "Nostalgia_Eclectic_Books.csv.ser", 
+            "Old_Time_Radio_Books.csv.ser", 
+            "Sports_Sports_Memorabilia.csv.ser", 
+            "Trains_Planes_Automobiles.csv.ser"
+        };
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter Your Choice: v");
-        System.out.printf("viewing: %s (%d records)\n", currentFileName, currentBooks.length);
-        
-        while (true) {
-            System.out.print("Enter the number of records to view (+/-n): ");
-            int n = sc.nextInt();
-            sc.nextLine();
-
-            if (n == 0) {
-                return; // return to the main menu
-            }
-
-            displayBooks(n);
-        }
-    }
-
-    // Function to display books based on the input n
-    public static void displayBooks(int n) {
-        int displayed = 0;
-        if (n > 0) {
-            // Display current record and n-1 records below it
-            for (int i = currentIndex; i < currentBooks.length && displayed < n; i++) {
-                System.out.println(currentBooks[i]);
-                currentIndex = i; // update currentIndex to the last displayed record
-                displayed++;
-            }
-            if (currentIndex == currentBooks.length - 1) {
-                System.out.println("EOF has been reached");
-            }
-        } else {
-            // displays current record and |n|-1 records above it
-            int range = Math.abs(n) - 1;
-            int start = Math.max(currentIndex - range, 0);
-            for (int i = start; i <= currentIndex; i++) {
-                System.out.println(currentBooks[i]);
-                currentIndex = i; // update currentIndex to the first displayed record
-                displayed++;
-            }
-            if (currentIndex == 0) {
-                System.out.println("BOF has been reached");
-            }
-        }
-    }
-
-    // method to select a file from sub-menu
-    public static void selectFile(Scanner sc) {
-        System.out.println("------------------------------");
-        System.out.println("          File Sub-Menu");
-        System.out.println("------------------------------");
-        for (int i = 0; i < files.length; i++) {
-            File file = new File(files[i]);
-            int records = 0;
+        // Load each file into a Book array
+        for (String fileName : fileNames) {
+            File file = new File("serFiles", fileName);
             if (file.exists()) {
                 try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
                     Book[] books = (Book[]) ois.readObject();
-                    records = books.length;
-                } catch (Exception e) {
-                    System.out.println("Error reading file " + files[i]);
+                    bookArrays.add(books);
+                } catch (IOException | ClassNotFoundException e) {
+                    System.out.println("Error reading file: " + fileName);
                 }
+            } else {
+                bookArrays.add(new Book[0]); // Empty array if file does not exist
             }
-            System.out.printf(" %d %s (%d records)\n", i + 1, files[i], records);
-        }
-        System.out.println(" 9 Exit");
-        System.out.println("------------------------------");
-        System.out.print(" Enter Your Choice: ");
-        int choice = sc.nextInt();
-        sc.nextLine();
-
-        if (choice == 9) {
-            return; // exits sub-menu
-        }
-
-        if (choice >= 1 && choice <= 8) {
-            loadBooksFromFile(files[choice - 1]);
-        } else {
-            System.out.println("Invalid choice. Returning to main menu.");
         }
     }
 
-    // Function to load books from the selected file
-    public static void loadBooksFromFile(String fileName) {
-        File file = new File(fileName);
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-            currentBooks = (Book[]) ois.readObject();
-            currentFileName = fileName;
-            currentIndex = 0;
-            System.out.println("File loaded successfully: " + fileName);
-        } catch (Exception e) {
-            System.out.println("Error loading file " + fileName);
+    private static String getCurrentFileName() {
+        return new String[] {
+            "Cartoons_Comics_Books.csv.ser", 
+            "Hobbies_Collectibles_Books.csv.ser", 
+            "Movies_TV.csv.ser", 
+            "Music_Radio_Books.csv.ser", 
+            "Nostalgia_Eclectic_Books.csv.ser", 
+            "Old_Time_Radio_Books.csv.ser", 
+            "Sports_Sports_Memorabilia.csv.ser", 
+            "Trains_Planes_Automobiles.csv.ser"
+        }[currentArrayIndex];
+    }
+
+    private static int getCurrentFileRecords() {
+        return bookArrays.get(currentArrayIndex).length;
+    }
+
+    private static void viewFile() {
+        Scanner scanner = new Scanner(System.in);
+        Book[] books = bookArrays.get(currentArrayIndex);
+
+        if (books.length == 0) {
+            System.out.println("No records to display.");
+            return;
         }
+
+        // Display the file
+        String choice;
+        do {
+            // Show records based on the current position
+            System.out.println("Viewing: " + getCurrentFileName() + " (" + books.length + " records)");
+            System.out.println("Current record: " + (currentRecordIndex + 1));
+
+            // Display the current record
+            System.out.println(books[currentRecordIndex]);
+
+            // Prompt for navigation
+            System.out.println("Enter n to navigate (positive/negative), or 0 to end viewing.");
+            System.out.print("Enter Your Choice: ");
+            choice = scanner.nextLine();
+
+            try {
+                int n = Integer.parseInt(choice);
+                navigateRecords(n, books);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter an integer.");
+            }
+
+        } while (!choice.equals("0"));
+    }
+
+    private static void navigateRecords(int n, Book[] books) {
+        int newIndex = currentRecordIndex + n;
+
+        if (n > 0) {
+            if (newIndex >= books.length) {
+                System.out.println("EOF has been reached.");
+                newIndex = books.length - 1;
+            }
+        } else if (n < 0) {
+            if (newIndex < 0) {
+                System.out.println("BOF has been reached.");
+                newIndex = 0;
+            }
+        }
+
+        currentRecordIndex = newIndex;
+    }
+
+    private static void selectFile() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("------------------------------");
+        System.out.println("File Sub-Menu");
+        System.out.println("------------------------------");
+
+        for (int i = 0; i < bookArrays.size(); i++) {
+            System.out.println((i + 1) + " " + getFileName(i) + " (" + bookArrays.get(i).length + " records)");
+        }
+
+        System.out.println("9 Exit");
+        System.out.print("Enter Your Choice: ");
+        int choice = scanner.nextInt();
+
+        if (choice >= 1 && choice <= 8) {
+            currentArrayIndex = choice - 1;
+            currentRecordIndex = 0; // Reset to the first record
+        }
+    }
+
+    private static String getFileName(int index) {
+        String[] fileNames = {
+            "Cartoons_Comics_Books.csv.ser", 
+            "Hobbies_Collectibles_Books.csv.ser", 
+            "Movies_TV.csv.ser", 
+            "Music_Radio_Books.csv.ser", 
+            "Nostalgia_Eclectic_Books.csv.ser", 
+            "Old_Time_Radio_Books.csv.ser", 
+            "Sports_Sports_Memorabilia.csv.ser", 
+            "Trains_Planes_Automobiles.csv.ser"
+        };
+        return fileNames[index];
     }
 }
