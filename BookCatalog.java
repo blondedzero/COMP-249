@@ -58,17 +58,25 @@ public class BookCatalog {
 
 	// do_part2: VALIDATES AND SERIALIZES RECORDS
     public static void do_part2() {
-        for (int i = 0; i < genreFileNames.length; i++) {
+     for (int i = 0; i < genreFileNames.length; i++) {
             String csvFileName = genreFileNames[i];
             String binaryFileName = binaryFileNames[i];
-            List<Book> books = new ArrayList<>();
+            
+            int maxBooks = 1000;  // Define a reasonable limit for maximum books in each file
+            Book[] books = new Book[maxBooks];
+            int bookCount = 0;
 
             try (BufferedReader br = new BufferedReader(new FileReader(csvFileName))) {
                 String line;
                 while ((line = br.readLine()) != null) {
                     try {
                         Book book = createBookFromRecord(line);
-                        books.add(book);
+                        if (bookCount < maxBooks) {
+                            books[bookCount++] = book;
+                        } else {
+                            System.out.println("Warning: Maximum number of books reached for " + csvFileName);
+                            break;
+                        }
                     } catch (Exception e) {
                         logSemanticError(csvFileName, e.getMessage(), line);
                     }
@@ -77,7 +85,7 @@ public class BookCatalog {
                 System.out.println("Error reading file " + csvFileName + ": " + e.getMessage());
             }
 
-            serializeBooks(books, binaryFileName);
+            serializeBooks(books, bookCount, binaryFileName);
         }
     }
 
@@ -299,19 +307,16 @@ public class BookCatalog {
         }
     }
 
-   // Serialize a list of Book objects to a binary file
-   private static void serializeBooks(List<Book> books, String fileName) {
-	File serDir = new File("serFiles");
-	File outputFile = new File(serDir, fileName);  // Create the file in the serFiles folder
+    private static void serializeBooks(Book[] books, int bookCount, String fileName) {
+        File serDir = new File("serFiles");
+        File outputFile = new File(serDir, fileName);
 
-	try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(outputFile))) {
-		oos.writeObject(books.toArray(new Book[0]));
-	} catch (IOException e) {
-		System.out.println("Error serializing books to " + fileName + ": " + e.getMessage());
-	}
-	}
-
-    
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(outputFile))) {
+            oos.writeObject(Arrays.copyOf(books, bookCount));  // Serialize only filled portion
+        } catch (IOException e) {
+            System.out.println("Error serializing books to " + fileName + ": " + e.getMessage());
+        }
+    }
     }
 
   
