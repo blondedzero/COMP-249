@@ -1,3 +1,11 @@
+// -----------------------------------------------------
+// Assignment 2
+// Question: Part 1
+// Written by: Kaila Quimson (40240746) & Nicholas Chamoun (40264135)
+// ----------------------------------------------------- 
+
+// This class defines a book object
+
 import java.io.Serializable;
 
 public class Book implements Serializable{

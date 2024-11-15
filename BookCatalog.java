@@ -62,7 +62,7 @@ public class BookCatalog {
             String csvFileName = genreFileNames[i];
             String binaryFileName = binaryFileNames[i];
             
-            int maxBooks = 1000;  // Define a reasonable limit for maximum books in each file
+            int maxBooks = 1000;  // reasonable book limit
             Book[] books = new Book[maxBooks];
             int bookCount = 0;
 
@@ -93,7 +93,9 @@ public class BookCatalog {
     public static void do_part3() {
     }
 
-	//FUNCTIONS
+    
+	// ---------- FUNCTIONS ----------
+
 	//FUNCTION THAT PROCESS EACH INPUT FILE FOR SYNTAX VALIDATION
 	private static void processFile(String filename) {
 		String line;

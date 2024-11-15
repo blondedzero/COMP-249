@@ -49,7 +49,7 @@ public class BookViewer {
                     selectFile(sc);
                     break;
                 case "x":
-                    System.out.println("Now exiting Kaila & Nicholas' Book Viewer program...");
+                    System.out.println("Now exiting the Book Viewer program...");
                     System.exit(0);
                     return;
                 default:
@@ -93,7 +93,7 @@ public class BookViewer {
                 displayed++;
             }
             if (currentIndex == currentBooks.length - 1) {
-                System.out.println("EOF has been reached");
+                System.out.println("End of file has been reached");
             }
         } else {
             // displays current record and |n|-1 records above it
@@ -105,7 +105,7 @@ public class BookViewer {
                 displayed++;
             }
             if (currentIndex == 0) {
-                System.out.println("BOF has been reached");
+                System.out.println("Beginning of fIle has been reached");
             }
         }
     }
