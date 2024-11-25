@@ -1,0 +1,44 @@
+What we need to do for:
+
+- CellPhone:
+* attributes
+* constructors
+* clone method
+* toString, equals, getters & setters
+
+- CellList:
+* private inner class CellNode (see next section)
+* private attributes: 
+    1. head (points to first node in list)
+    2. size (# of nodes in list)
+* constructors
+* addToStart method
+* insertAtIndex method
+* deleteFromIndex method
+* deleteFromStart method
+* replaceAtIndex method
+* find method
+* contains method
+* showContents method
+* equals method
+
+- CellNode:
+* object of CellPhone
+* pointer to a CellNode
+* constructors
+* clone method
+* gettes & setters
+
+- CellListUtilization:
+* has main method
+* create 2+ empty CellList instances
+* open Cell_Info.txt & read it line by line to initialize a CellList
+* show contents of newly created list
+* prompt user to enter some serial numbers
+* search the list for these values
+* create enough bojects to test each constructor/method 
+
+
+
+
+
