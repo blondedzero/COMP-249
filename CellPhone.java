@@ -102,17 +102,3 @@ public class CellPhone{
     }
       
 }
-
-
-/* Instructions:
-
-I) The CellPhone class has the following attributes: a serialNum (long type), a brand (String type), a year (int type, which indicates manufacturing year) and a price (double type). It is assumed that brand name is always recorded as a single word (i.e. Motorola, SonyEricsson, Panasonic, etc.). It is also assumed that all cellular phones follow one system of assigning serial numbers, regardless of their different brands, so no two cell phones may have the same serial number.
-
-You are required to write the implementation of the CellPhone class. Beside the usual mutator and accessor methods (i.e. getPrice(), setYear()) the class must have the following:
-(a) Parameterized constructor that accepts four values and initializes serialNum, brand, year and price to these passed values;
-(b) Copy constructor, which takes two parameters, a CellPhone object and a long value. The newly created object will be assigned all the attributes of the passed object, with the exception of the serial number. serialNum is assigned the value passed as the second parameter to the constructor. It is always assumed that this value will correspond to the unique serial number rule;
-(c) clone() method. This method will prompt the user to enter a new serial number, then creates and returns a clone of the calling object with the exception of the serial number, which is assigned the value entered by the user;
-(d) Additionally, the class should have a toString() and an equals() methods. Two cell phones are equal if they
-have the same attributes, with the exception of the serial number, which could be different.
-
-*/

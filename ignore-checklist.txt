@@ -1,17 +1,6 @@
 What we need to do for:
 
-- CellPhone:
-* attributes
-* constructors
-* clone method
-* toString, equals, getters & setters
-
 - CellList:
-* private inner class CellNode (see next section)
-* private attributes: 
-    1. head (points to first node in list)
-    2. size (# of nodes in list)
-* constructors
 * addToStart method
 * insertAtIndex method
 * deleteFromIndex method
@@ -21,13 +10,6 @@ What we need to do for:
 * contains method
 * showContents method
 * equals method
-
-- CellNode:
-* object of CellPhone
-* pointer to a CellNode
-* constructors
-* clone method
-* gettes & setters
 
 - CellListUtilization:
 * has main method

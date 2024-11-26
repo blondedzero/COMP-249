@@ -1,31 +1,205 @@
 // -----------------------------------------------------
 // Assignment 3
-// Question 3
+// Question 2
 // Written by: Nicholas Chamoun (40264135) & Kaila Quimson (40240746)
 // -----------------------------------------------------
 
 public class CellList{
 
+    //private inner CellNode class
+    private class CellNode {
+        
+        // CellNode attributes
+        private CellPhone phone;    // CellPhone object
+        private CellNode node;      // pointer to a CellNode object
 
-}
+       // CellNode default constructor
+        public CellNode(){
+        this.phone = null;
+        this.node = null;
+        }
+
+        // CellNode parameterized constructor
+        public CellNode(CellPhone phone, CellNode node) {
+            this.phone = phone;
+            this.node = node;
+        }
+
+        // CellNode copy constructor
+        public CellNode(CellNode copy) {
+            this.phone = new CellPhone(copy.phone, copy.phone.getSerialNum());
+            this.node = copy.node;
+        }
+
+        // CellNode clone method
+        public CellNode clone() {
+            return new CellNode(this);
+        }
+
+        // CellPhone accessor
+        public CellPhone getPhone() {
+            return phone;
+        }
+
+        //CellNode accessor & mutator
+        public CellNode getNode() {
+            return node;
+        }
+        public void setNode(CellNode node) {
+            this.node = node;
+        }
+    }
+
+    // CellList attributes
+    private CellNode head;  // points to first node in list
+    private int size;       // # of nodes in list
+
+    // CellList default constructor
+    public CellList() { // creates an empty list
+		
+        head = null;
+        size = 0;
+		
+    }
+
+    // CellList copy constructor
+        public CellList(CellList copy) {
+			
+            this.head = null; // initialized empty list
+			this.size = 0; // initilize  to 0
+            
+			CellNode original = copy.head;
+			
+			// Loops through the copy list until it reaches nothing
+			while (original != null) {
+
+				addToStart(original.getPhone()); // It add the phone from the original node up to the front of the new list
+				original = original.getNode(); // moves to the following node 
+
+			}
+        }
+
+	// ---- METHODS ----
+	// addToStart method
+    public void addToStart(CellPhone phone) {
+        head = new CellNode(phone, head);
+        size++; // increment size
+    }
+
+    // replaceAtIndex method
+    // fixed
+    public void replaceAtIndex(CellPhone phone, int index) {
+
+        //validates index
+        if(index < 0 || index >= size){
+            throw new IndexOutOfBoundsException("Error: Invalid index!");
+        }
+        // Goes through list to find at index
+        CellNode current = head;
+        for (int i = 0; i < index - 1; i++) {
+            current = current.node;
+        }
+        current.node = new CellNode(phone, current.node);
+        size++;
+        
+    }
+
+	// insertAtIndex method
+    public void insertAtIndex(CellPhone phone, int index) {
+
+        if (index < 0 || index >=  size) throw new IndexOutOfBoundsException("Error: Invalid index!");
+        if (index == 0) {
+            addToStart(phone);
+        }
+        replaceAtIndex(phone, index);
+    }
+
+	// deleteFromIndex method
+     public void deleteFromIndex(int index) {
+        if (index < 0 || index > size) throw new IndexOutOfBoundsException("Error: Invalid index!");
+
+        if (index == 0) {
+            deleteFromStart(); // method defined later
+
+        }
+        CellNode current = head;
+        for (int i = 0; i < index - 1; i++) {
+            current = current.node;
+        }
+        CellNode nodeDelete = current.node;
+        current.node = nodeDelete.node;
+        size--;
+    }
+	
+	
+    // deleteFromStart method
+    public void deleteFromStart() {
+        if (head != null) {
+            head = head.node;
+            size--; // decrement size
+        }
+    }
+
+    // contains method 
+    public boolean contains(long serialNum) {       // will fix later
+        return (find(serialNum) != null); // method defined later
+    }
+
+    // find method
+    public CellNode find(long serialNum) {
+        CellNode current = head;
+        int i = 0;
+        while (current != null) {
+            i++;
+            if (current.phone.getSerialNum() == serialNum) {
+                System.out.println("Found after " + i + " iterations.");
+                return current;
+            }
+            current = current.node;
+        }
+        System.out.println("Not found after " + i + " iterations.");
+        return null;
+    }
+
+    // showContents method
+    public void showContents() {
+        System.out.println("The current size of the list is " + size + ". Here are the contents of the list");
+        System.out.println("====================================================================");
+        CellNode current = head;
+        while (current != null) {
+            System.out.print("[" + current.phone + "] ---> ");
+            current = current.node;
+        }
+        System.out.println("X"); // end of list's contents
+    }
+    
+    // CellList equals method 
+    public boolean equal(CellList o) {
+        
+        if (this.size != o.size) {
+            return false;
+        }
+
+        CellNode c1 = this.head;
+        CellNode c2 = o.head;
+
+        // loops until it reached an null
+        while (c1 != null) {
+            if (!c1.phone.equals(c2.phone)) { // confirms that c1 is not the same as c2 thus returns false
+                return false;
+            }
+            c1 = c1.node; // moves c1 to the next node in list
+            c2 = c2.node; // moves c2 to the next node in list
+        }
+        return true;
+    }
 
 
-
-
-
-
+} 
 
 /* Instructions:
 
 III) The CellList class has the following:
-(a) An inner class called CellNode. This class has the following:
-	i. Two private attributes: an object of CellPhone and a pointer to a CellNode object;
-	ii. A default constructor, which assigns both attributes to null;
-	iii. A parameterized constructor that accepts two parameters, a CellPhone object and a CellNode object,
-then initializes the attributes accordingly;
-	iv. A copy constructor;
-	v. A clone() method;
-	vi. Other mutator and accessor methods.
 (b) A private attribute called head, which should point to the first node in this list object;
 (c) A private attribute called size, which always indicates the current size of the list (how many nodes are in thelist);
 (d) A default constructor, which creates an empty list;
