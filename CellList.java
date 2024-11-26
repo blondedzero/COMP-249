@@ -7,7 +7,7 @@
 public class CellList{
 
     //private inner CellNode class
-    private class CellNode {
+    class CellNode {
         
         // CellNode attributes
         private CellPhone phone;    // CellPhone object

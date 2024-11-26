@@ -16,7 +16,7 @@ public class CellPhone{
     protected double price;
 
     //intializes serial number to 1000000000
-    protected static long serialNumCounter = 1000000000;
+    protected static long serialNumCounter = 1000000;
 
     //parameterized contructor
     public CellPhone(long serialNum, String brand, int year, double price){
@@ -82,7 +82,7 @@ public class CellPhone{
         long newSerialNum = scan.nextLong();
 
         //checks if user input is less than 10 digits. If so it prompts a message
-        if(newSerialNum < 1000000000){
+        if(newSerialNum < 1000000){
             System.out.println("Invalid serial number output");
         }
 
