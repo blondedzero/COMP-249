@@ -71,9 +71,134 @@ public class CellListUtilization {
             } catch(NumberFormatException nfe){ System.out.println("Error: Invalid serial number " + serialNum[i]);}
         }
 
+        CellPhone p1 = new CellPhone(1497204, "iPhone", 2024, 1200.99);
+        CellPhone p2 = new CellPhone(8624729, "Nokia", 2024, 200.99);
+        CellPhone p3 = new CellPhone(5929837, "Blackberry", 2024, 1200.99);
+
+        l2.addToStart(p1);
+        l2.addToStart(p2);
+        l2.addToStart(p3);
+
+        boolean exit = false;
+        while (!exit) {
+            System.out.println("\n ~ Test Menu ~");
+            System.out.println("(1) Display contents of the list 2");
+            System.out.println("(2) Add to Start");
+            System.out.println("(3) Insert at Index");
+            System.out.println("(4) Replace at Index");
+            System.out.println("(5) Delete from Index");
+            System.out.println("(6) Delete from Start");
+            System.out.println("(7) Check if a Serial Number Exists");
+            System.out.println("(8) Copy the List");
+            System.out.println("(9) Compare Two Lists");
+            System.out.println("11. Exit");
+            System.out.print("Enter choice: ");
+            int choice = scan.nextInt();
+
+            switch (choice) {
+                case 1:
+                    l2.showContents();
+                    break;
+
+                case 2: {
+                    System.out.print("Enter a phone to add (SN, brand, year, price): ");
+
+                    long sn = scan.nextLong();
+                    String brand = scan.next();
+                    int year = scan.nextInt();
+                    double price = scan.nextDouble();
+
+                    CellPhone userPhone = new CellPhone(sn, brand, year, price);
+                    l2.addToStart(userPhone);
+                    System.out.println("Phone added to start of list 2.");
+                    break;
+                }
+                case 3: {
+                    System.out.print("Enter index to insert at: ");
+                    int index = scan.nextInt();
+                    System.out.print("Enter a phone to insert (brand, model, serial, price): ");
+                    long sn = scan.nextLong();
+                    String brand = scan.next();
+                    int year = scan.nextInt();
+                    double price = scan.nextDouble();
+
+                    CellPhone userPhone = new CellPhone(sn, brand, year, price);
+                    try {
+                        l2.insertAtIndex(userPhone, index);
+                        System.out.println("Phone inserted at index " + index);
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                }
+                case 4: {
+                    System.out.print("Enter index to replace at: ");
+                    int index = scan.nextInt();
+                    System.out.print("Enter a phone to replace with (brand, model, serial, price): ");
+                    long sn = scan.nextLong();
+                    String brand = scan.next();
+                    int year = scan.nextInt();
+                    double price = scan.nextDouble();
+
+                    CellPhone userPhone = new CellPhone(sn, brand, year, price);
+                    try {
+                        l2.replaceAtIndex(userPhone, index);
+                        System.out.println("Phone replaced at index " + index);
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                }
+                case 5: {
+                    System.out.print("Enter index to delete from: ");
+                    int index = scan.nextInt();
+                    try {
+                        l2.deleteFromIndex(index);
+                        System.out.println("Deleted from index " + index);
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                }
+                case 6: {
+                    l2.deleteFromStart();
+                    System.out.println("Deleted from start.");
+                    break;
+                }
+                case 7: {
+                    System.out.print("Enter a serial number to find: ");
+                    long serial = scan.nextLong();
+                    if (l2.contains(serial)) {
+                        System.out.println("Serial number exists in the list.");
+                    } else {
+                        System.out.println("Serial number does not exist.");
+                    }
+                    break;
+                }
+                //double check
+                case 8: {
+                    CellList copy = new CellList(l2);
+                    System.out.println("Copied list contents:");
+                    copy.showContents();
+                    break;
+                }
+                case 10: {
+                    System.out.println("Creating a second list for comparison...");
+                    System.out.println("Are the lists equal? " + l1.equal(l2));
+                    break;
+                }
+                case 11: {
+                    exit = true;
+                    break;
+                }
+                default: {
+                    System.out.println("Invalid choice! Try again.");
+                }
+            }
+        }
+        scan.close();
     }
-}
-   
+}   
     
 
 
