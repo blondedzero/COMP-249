@@ -91,7 +91,8 @@ public class CellListUtilization {
             System.out.println("(7) Check if a Serial Number Exists");
             System.out.println("(8) Copy the List");
             System.out.println("(9) Compare Two Lists");
-            System.out.println("11. Exit");
+            System.out.println("(10) Exit");
+            
             System.out.print("Enter choice: ");
             int choice = scan.nextInt();
 
