@@ -146,7 +146,7 @@ public class CellList{
     }
 
     // find method
-    public CellNode find(long serialNum) {
+    public CellNode find(long serialNum) {      // potential privacy leak, since we're exporting a non-public type in a public methos
         CellNode current = head;
         int i = 0;
         while (current != null) {
