@@ -164,13 +164,19 @@ public class CellList{
     // showContents method
     public void showContents() {
         System.out.println("\nThe current size of the list is " + size + ". Here are the contents of the list");
-        System.out.println("====================================================================");
+        System.out.println("=====================================================================");
         CellNode current = head;
+        int count = 0;
         while (current != null) {
             System.out.print(current.phone + " ---> ");
             current = current.node;
+            count++;
+            if (count == 3) {
+                System.out.print("\n");
+                count = 0;
+            }   
         }
-        System.out.println("X"); // end of list's contents
+        System.out.println("X\n"); // end of list's contents
     }
     
     // CellList equals method 
