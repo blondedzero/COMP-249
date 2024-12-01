@@ -59,7 +59,7 @@ public class CellListUtilization {
         System.out.println("\nContents of first list initilized by file: ");
         l1.showContents();
 
-        System.out.println("Enter corresponding serial numbers to search in file (use a comma for seperation)");
+        System.out.println("Enter corresponding serial numbers to search in file (use a comma for seperation): ");
         String input = scan.nextLine();
         String[] serialNum = input.split(",");
 
@@ -71,8 +71,10 @@ public class CellListUtilization {
 
                 CellList.CellNode foundNode = l1.find(serialNumber);  // find node
 
-                if(foundNode != null){System.out.println("Phone found: " + foundNode.getPhone());}
-                else{System.out.println("Phone with SN " + serialNumber + " has not been found.");}
+                if(foundNode != null){System.out.println("      - Phone found: " + foundNode.getPhone());}
+                else{
+                    System.out.println("    - Warning: Phone with SN " + serialNumber + " has not been found.");
+                }
 
             } catch(NumberFormatException nfe){ System.out.println("Error: Invalid serial number " + serialNum[i]);}
         }
@@ -97,7 +99,7 @@ public class CellListUtilization {
             System.out.println("(7) Check if a Serial Number Exists");
             System.out.println("(8) Copy the List");
             System.out.println("(9) Compare Two Lists");
-            System.out.println("(10) Exit");
+            System.out.println("(0) Exit");
             
             System.out.print("Enter choice: ");
             int choice = scan.nextInt();
@@ -189,13 +191,14 @@ public class CellListUtilization {
                     copy.showContents();
                     break;
                 }
-                case 10: {
+                case 9: {
                     System.out.println("Creating a second list for comparison...");
                     System.out.println("Are the lists equal? " + l1.equals(l2));
                     break;
                 }
-                case 11: {
+                case 0: {
                     exit = true;
+                    System.out.println("\nSession ended. Terminating the program...");
                     break;
                 }
                 default: {
@@ -204,6 +207,7 @@ public class CellListUtilization {
             }
         }
         scan.close();
+        System.exit(1);
     }
 }   
     
