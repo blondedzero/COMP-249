@@ -185,7 +185,7 @@ public class CellListUtilization {
                 }
                 case 10: {
                     System.out.println("Creating a second list for comparison...");
-                    System.out.println("Are the lists equal? " + l1.equal(l2));
+                    System.out.println("Are the lists equal? " + l1.equals(l2));
                     break;
                 }
                 case 11: {
