@@ -93,7 +93,7 @@ public class CellPhone{
 
     @Override
     public String toString(){
-        return "Cellphone: \n Serial Number: " + this.serialNum + "\n Brand: '" + this.brand + " '\' \nYear: " +this.year+ "\n Price: " +this.price;
+        return "[" + this.serialNum + " " + this.brand + " " + this.price + " " + this.year + "]";
     }
 
     @Override

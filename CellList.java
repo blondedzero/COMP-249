@@ -163,11 +163,11 @@ public class CellList{
 
     // showContents method
     public void showContents() {
-        System.out.println("The current size of the list is " + size + ". Here are the contents of the list");
+        System.out.println("\nThe current size of the list is " + size + ". Here are the contents of the list");
         System.out.println("====================================================================");
         CellNode current = head;
         while (current != null) {
-            System.out.print("[" + current.phone + "] ---> ");
+            System.out.print(current.phone + " ---> ");
             current = current.node;
         }
         System.out.println("X"); // end of list's contents
