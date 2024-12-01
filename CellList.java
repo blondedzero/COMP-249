@@ -4,6 +4,8 @@
 // Written by: Nicholas Chamoun (40264135) & Kaila Quimson (40240746)
 // -----------------------------------------------------
 
+import java.util.NoSuchElementException;
+
 public class CellList{
 
     //private inner CellNode class
@@ -32,6 +34,7 @@ public class CellList{
         }
 
         // CellNode clone method
+        @Override
         public CellNode clone() {
             return new CellNode(this);
         }
@@ -87,7 +90,6 @@ public class CellList{
     }
 
     // replaceAtIndex method
-    // fixed
     public void replaceAtIndex(CellPhone phone, int index) {
 
         //validates index
@@ -100,14 +102,12 @@ public class CellList{
             current = current.node;
         }
         current.node = new CellNode(phone, current.node);
-        size++;
-        
     }
 
 	// insertAtIndex method
     public void insertAtIndex(CellPhone phone, int index) {
 
-        if (index < 0 || index >=  size) throw new IndexOutOfBoundsException("Error: Invalid index!");
+        if (index < 0 || index >= size) throw new NoSuchElementException("Error: Invalid index!");
         if (index == 0) {
             addToStart(phone);
         }
@@ -116,15 +116,15 @@ public class CellList{
 
 	// deleteFromIndex method
      public void deleteFromIndex(int index) {
-        if (index < 0 || index > size) throw new IndexOutOfBoundsException("Error: Invalid index!");
+        if (index < 0 || index >= size) throw new NoSuchElementException("Error: Invalid index!");
 
         if (index == 0) {
             deleteFromStart(); // method defined later
-
+            
         }
         CellNode current = head;
         for (int i = 0; i < index - 1; i++) {
-            current = current.node;
+            current = current.getNode();
         }
         CellNode nodeDelete = current.node;
         current.node = nodeDelete.node;
@@ -141,7 +141,7 @@ public class CellList{
     }
 
     // contains method 
-    public boolean contains(long serialNum) {       // will fix later
+    public boolean contains(long serialNum) {   
         return (find(serialNum) != null); // method defined later
     }
 
@@ -174,7 +174,7 @@ public class CellList{
     }
     
     // CellList equals method 
-    public boolean equal(CellList o) {
+    public boolean equals(CellList o) {
         
         if (this.size != o.size) {
             return false;

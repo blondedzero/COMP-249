@@ -76,6 +76,7 @@ public class CellPhone{
     }
 
     //clone method
+    @Override
     public CellPhone clone(){
 
         System.out.println("Enter a new serial number (must be 10 digits)");
@@ -90,10 +91,12 @@ public class CellPhone{
 
     }
 
+    @Override
     public String toString(){
         return "Cellphone: \n Serial Number: " + this.serialNum + "\n Brand: '" + this.brand + " '\' \nYear: " +this.year+ "\n Price: " +this.price;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (o == null || o.getClass() != this.getClass())
             return false;
