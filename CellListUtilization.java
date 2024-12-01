@@ -15,6 +15,12 @@ public class CellListUtilization {
         CellList l1 = new CellList();
         CellList l2 = new CellList();
         
+        // Welcome Message
+        System.out.println("~ Welcome to Nicholas & Kaila's Cellphone Record List Manipulation Program! ~\n");
+
+        // find() Method Changelog
+        System.out.println("Changelog for the serial number find method:");
+
         try (BufferedReader read = new BufferedReader(new FileReader("Cell_info.txt"))){
 
             String line;
@@ -50,7 +56,7 @@ public class CellListUtilization {
         } catch (IOException e) { System.out.println("Error! could not read file" + e.getMessage());}
 
         // displaying l1
-        System.out.println("Contents of first list initilized by file: ");
+        System.out.println("\nContents of first list initilized by file: ");
         l1.showContents();
 
         System.out.println("Enter corresponding serial numbers to search in file (use a comma for seperation)");

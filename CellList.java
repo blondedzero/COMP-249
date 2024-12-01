@@ -152,12 +152,11 @@ public class CellList{
         while (current != null) {
             i++;
             if (current.phone.getSerialNum() == serialNum) {
-                System.out.println("Found after " + i + " iterations.");
+                System.out.println("    - Update: a cell phone's serial number was found after " + i + " iterations!");
                 return current;
             }
             current = current.node;
         }
-        System.out.println("Not found after " + i + " iterations.");
         return null;
     }
 
