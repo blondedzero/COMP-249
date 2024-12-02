@@ -125,7 +125,7 @@ public class CellListUtilization {
                 case 3: {
                     System.out.print("Enter index to insert at: ");
                     int index = scan.nextInt();
-                    System.out.print("Enter a phone to insert (brand, model, serial, price): ");
+                    System.out.print("Enter a phone to insert (serial, brand, year, price): ");
                     long sn = scan.nextLong();
                     String brand = scan.next();
                     int year = scan.nextInt();
@@ -143,7 +143,7 @@ public class CellListUtilization {
                 case 4: {
                     System.out.print("Enter index to replace at: ");
                     int index = scan.nextInt();
-                    System.out.print("Enter a phone to replace with (brand, model, serial, price): ");
+                    System.out.print("Enter a phone to replace with (serial, brand, year, price): ");
                     long sn = scan.nextLong();
                     String brand = scan.next();
                     int year = scan.nextInt();
