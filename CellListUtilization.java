@@ -3,12 +3,23 @@
 // Question 3
 // Written by: Nicholas Chamoun (40264135) & Kaila Quimson (40240746)
 // -----------------------------------------------------
+
+/**
+* The CellListUtilization class provides a program for manipulating CellPhone records stored in
+* a linked list. It reads data from the Cell_Info.txt file, allows user interaction for searching,
+* modifying, and testing the linked list, and ensures no duplicate entries are present in the list.
+*/ 
+
 import java.io.*;
 import java.util.*;
 
 public class CellListUtilization {
 
+    // potential privacy leak: constantly displaying the serial numbers of phones.
+    // fix: that data could be censored.
+
     static Scanner scan = new Scanner(System.in); // Scanner
+
     public static void main(String[] args) {
 
         // Creation of empty lists
@@ -49,7 +60,7 @@ public class CellListUtilization {
                             l1.addToStart(phone); // adds to start if not a duplicate
                         }
 
-                    } catch (NumberFormatException nfe){ System.out.println("Invalid line at " + line);}
+                    } catch (NumberFormatException nfe){ System.out.println("Invalid line at " + line);}    // potential privacy leak: the line could contain sensitive info!
                 }
             }
   

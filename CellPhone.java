@@ -4,6 +4,9 @@
 // Written by: Nicholas Chamoun (40264135) & Kaila Quimson (40240746)
 // -----------------------------------------------------
 
+/**
+* The CellPhone class defines a CellPhone object and its methods.
+*/ 
 
 import java.util.*;
 public class CellPhone{
@@ -38,6 +41,9 @@ public class CellPhone{
         this.price = price;
 
     }
+
+    // potential privacy leak: a non-public type is being exported into a public method.
+    // fix: the method could request authentication to insure the user has permission to access this information.
 
     //getters & setters
     public long getSerialNum(){

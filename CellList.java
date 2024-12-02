@@ -4,6 +4,10 @@
 // Written by: Nicholas Chamoun (40264135) & Kaila Quimson (40240746)
 // -----------------------------------------------------
 
+/**
+* The CellList class creates a linked list and multiple methods to manipulate CellNodes.
+*/ 
+
 import java.util.NoSuchElementException;
 
 public class CellList{
@@ -146,8 +150,8 @@ public class CellList{
     }
 
     // find method
-    public CellNode find(long serialNum) {      // potential privacy leak, since we're exporting a non-public type in a public methos
-        CellNode current = head;
+    public CellNode find(long serialNum) {      // potential privacy leak: a non-public type is being exported into a public method.
+        CellNode current = head;                // fix: the method could be altered to only return a CellPhone object instead of the node.
         int i = 0;
         while (current != null) {
             i++;
